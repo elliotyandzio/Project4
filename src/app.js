@@ -1,18 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Button from '@material-ui/core/Button';
-import 'typeface-roboto';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+import TeamsIndex from './components/teams/Index';
+import Home from './components/Home';
+import Navbar from './components/Navbar';
+
+import 'bulma';
 
 class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>WDI 33</h1>
-        <Button variant="raised" color="primary">
-          Hello World
-        </Button>
-      </div>
+      <Router>
+        <div>
+          <Navbar />
+          <Switch>
+            <Route path="/teams" component={TeamsIndex} />
+            <Route exact path="/" component={Home} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
