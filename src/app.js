@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import TeamsIndex from './components/teams/Index';
-import PlayersIndex from './components/players/Index';
+import TeamsShow from './components/teams/Show';
 import PlayersShow from './components/players/Show';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
@@ -24,7 +24,7 @@ class App extends React.Component {
           <FlashMessages />
           <Switch>
             <SecureRoute path="/teams/:id/players/:playerId" component={PlayersShow} />
-            <SecureRoute path="/teams/:id" component={PlayersIndex} />
+            <SecureRoute path="/teams/:id" component={TeamsShow} />
             <SecureRoute path="/teams" component={TeamsIndex} />
             <Route path="/register" component={AuthRegister} />
             <Route exact path="/login" component={AuthLogin} />
