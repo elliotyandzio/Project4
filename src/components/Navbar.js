@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import Auth from '../components/lib/Auth';
 
 class Navbar extends React.Component {
 
@@ -15,17 +16,17 @@ class Navbar extends React.Component {
     this.state.navIsOpen && this.setState({ navIsOpen: false });
   }
 
-  // handleLogout = () => {
-  //     Auth.logout();
-  //     this.props.history.push('/');
-  //   }
+  handleLogout = () => {
+    Auth.logout();
+    this.props.history.push('/');
+  }
 
   render() {
     return (
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+      <nav className="navbar is-success" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <Link className="navbar-item" to="/">
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" width="30" />
+            <img src="" width="30" />
           </Link>
           <a role="button" className={`navbar-burger ${this.state.navIsOpen? 'is-active' : ''}`} onClick={this.handleToggle}>
             <span aria-hidden="true"></span>
@@ -36,7 +37,10 @@ class Navbar extends React.Component {
 
         <div className={`navbar-menu ${this.state.navIsOpen ? 'is-active' : ''}`}>
           <div className="navbar-end">
-            <Link to="/teams" className="navbar-item">Teams</Link>
+            {Auth.isAuthenticated() && <Link to="/teams" className="navbar-item">Teams</Link>}
+            {!Auth.isAuthenticated() && <Link to="/register" className="navbar-item">Register</Link>}
+            {!Auth.isAuthenticated() && <Link to="/login" className="navbar-item">Login</Link>}
+            {Auth.isAuthenticated() && <a onClick={this.handleLogout} className="navbar-item">Logout</a>}
           </div>
         </div>
       </nav>

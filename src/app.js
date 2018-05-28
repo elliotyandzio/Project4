@@ -7,6 +7,10 @@ import PlayersIndex from './components/players/Index';
 import PlayersShow from './components/players/Show';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
+import AuthRegister from './components/Auth/Register';
+import AuthLogin from './components/Auth/Login';
+import SecureRoute from './components/common/SecureRoute';
+import FlashMessages from './components/common/FlashMessages';
 
 import 'bulma';
 
@@ -17,14 +21,15 @@ class App extends React.Component {
       <Router>
         <main>
           <Navbar />
-          <div className="container">
-            <Switch>
-              <Route path="/teams/:id/players/:playerId" component={PlayersShow} />
-              <Route path="/teams/:id" component={PlayersIndex} />
-              <Route path="/teams" component={TeamsIndex} />
-              <Route exact path="/" component={Home} />
-            </Switch>
-          </div>
+          <FlashMessages />
+          <Switch>
+            <SecureRoute path="/teams/:id/players/:playerId" component={PlayersShow} />
+            <SecureRoute path="/teams/:id" component={PlayersIndex} />
+            <SecureRoute path="/teams" component={TeamsIndex} />
+            <Route path="/register" component={AuthRegister} />
+            <Route exact path="/login" component={AuthLogin} />
+            <Route exact path="/" component={Home} />
+          </Switch>
         </main>
       </Router>
     );

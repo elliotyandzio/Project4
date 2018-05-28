@@ -16,13 +16,17 @@ class TeamsIndex extends React.Component {
   }
 
 
-
+  delete = () => {
+    axios.delete(`/api/teams/${this.props.match.params.id}`)
+      .then(() => this.props.history.push('/teams'));
+  }
 
   render() {
     console.log(teamPlayers);
     const teamPlayers = this.state.teamPlayers;
     return(
       <div>
+        <button className="button is-danger" onClick={this.delete}>Delete</button>
         {teamPlayers.map(player =>
           <Link key={player.name} to={`/teams/${this.props.match.params.id}/players/${player._id}`}>
             <h1>{player.name}</h1>

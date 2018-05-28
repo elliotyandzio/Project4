@@ -5,9 +5,18 @@ import axios from 'axios';
 class TeamsIndex extends React.Component {
   state = {
     player: {},
-    reports: []
+    reports: [],
+    isOpen: false,
+    id: ''
   }
 
+  handleToggle = (e) => {
+    this.setState({ isOpen: !this.state.isOpen, id: e.target.id});
+  }
+
+  componentWillUpdate() {
+    this.state.isOpen && this.setState({ isOpen: false });
+  }
 
   componentDidMount() {
     axios.get(`/api/teams/${this.props.match.params.id}/players/${this.props.match.params.playerId}`)
@@ -18,57 +27,43 @@ class TeamsIndex extends React.Component {
   }
 
 
-
   render() {
-    console.log(this.state.reports);
     return(
-      <div>
-        <h1>Reports Page</h1>
-        {this.state.player.name}
-        {this.state.reports.map(report =>
-          <div key={report.id}>
-            <h1>{report.opposition}</h1>
-            <p>{report.score}</p>
-            <p>{report.ageGroup}</p>
-            <p>{report.footed}</p>
-            <p>{report.position}</p>
+      <div className="container">
+        <h1 className="is-size-1 has-text-centered">{this.state.player.name}</h1>
+        <h2 className="is-size-2">Reports:</h2>
+        <div>
+          {this.state.reports.map(report =>
+            <div key={report._id}>
+              <div className="tabs">
+                <ul>
+                  <li><a onClick={this.handleToggle} id={report._id}>Vs {report.opposition}</a></li>
+                </ul>
+              </div>
+              {this.state.id === report._id && <div className={`${this.state.isOpen ? 'is-invisible' : ''}`}>
+                <div className="columns">
+                  <div className="column is-half-desktop">
+                    <p className="is-size-5">Opposition: {report.opposition}</p>
+                    <p className="is-size-5">Score :{report.score}</p>
+                    <p className="is-size-5">Age Group: {report.ageGroup}</p>
+                  </div>
+                  <div className="column is-half-desktop">
+                    <p className="is-size-5">Footed: {report.footed}</p>
+                    <p className="is-size-5">Position: {report.position}</p>
+                  </div>
+                </div>
+              </div>}
+            </div>)}
+
+          <div>
           </div>
-        )}
-
-        <div className="tabs is-centered">
-          <ul>
-            <li className="is-active">
-              <a>
-                <span className="icon is-small"><i className="fas fa-image" aria-hidden="true"></i></span>
-                <span>Pictures</span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span className="icon is-small"><i className="fas fa-music" aria-hidden="true"></i></span>
-                <span>Music</span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span className="icon is-small"><i className="fas fa-film" aria-hidden="true"></i></span>
-                <span>Videos</span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span className="icon is-small"><i className="far fa-file-alt" aria-hidden="true"></i></span>
-                <span>Documents</span>
-              </a>
-            </li>
-          </ul>
         </div>
-
-
-
       </div>
     );
   }
 }
+
+
+
 
 export default TeamsIndex;
