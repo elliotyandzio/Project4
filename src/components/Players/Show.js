@@ -58,11 +58,7 @@ class TeamsIndex extends React.Component {
               <li key={report._id}><a id={report._id} onClick={this.handleToggle}>Vs {report.opposition}</a></li>)}
           </ul>
         </div>
-        {/* {this.state.reports &&
-          this.state.reports.filter(report => {
-            this.state.id === report._id return <p key={i}>{report.opposition} - {report._id}</p>;
-          })
-        } */}
+
         {!this.state.id && <p>Please select a report</p>}
         {this.state.reports && this.state.reports.map(report => this.state.id === report._id && <div>
           <h4 key={report._id} className="is-size-4">Game Info</h4>
@@ -80,6 +76,25 @@ class TeamsIndex extends React.Component {
           </div>
           <hr />
         </div>)}
+
+
+        {/* Start of the new team modal */}
+        <div className={`modal ${this.state.modalIsOpen ? 'is-active' : ''}`}>
+          <div className="modal-background"></div>
+          <div className="modal-card">
+            <header className="modal-card-head">
+              <p className="modal-card-title">Add a Report</p>
+              <button onClick={() => this.setState({ isOpen: false })} className="delete" aria-label="close"></button>
+            </header>
+            <section className="modal-card-body">
+              <ReportsNew
+              />
+            </section>
+          </div>
+        </div>
+        {/* End of the new team modal */}
+
+
       </div>
 
     );

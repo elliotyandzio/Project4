@@ -10,9 +10,6 @@ class TeamsIndex extends React.Component {
   componentDidMount() {
     axios.get(`/api/teams/${this.props.match.params.id}`)
       .then(res => this.setState({teamPlayers: res.data.players}));
-    // const teamPlayers = res.data.players.filter(function(el) {
-  //   return el.reports !== (el.reports.length === 0);
-  // });
   }
 
 
@@ -28,7 +25,8 @@ class TeamsIndex extends React.Component {
       <div>
         {/* {!this.state.teamPlayers && <p>There is nothing yet. Please add some players</p>} */}
         {teamPlayers.map(player =>
-          <Link key={player.name} to={`/teams/${this.props.match.params.id}/players/${player._id}`}>
+          <Link key={player.name}
+            to={`/teams/${this.props.match.params.id}/players/${player._id}`}>
             <h1>{player.name}</h1>
           </Link>
         )}

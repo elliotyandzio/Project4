@@ -1,6 +1,7 @@
 import React from 'react';
+import AutoComplete from '../common/AutoComplete';
 
-const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect }) => {
+const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, handlePlaceChange }) => {
 
   return (
     <form onSubmit={handleSubmit}>
@@ -20,10 +21,6 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect })
         <label htmlFor="footed">Footed</label>
         <input id="footed" name="footed" className="input" placeholder="Footed" onChange={handleChange} value={report.footed || ''} />
       </div>
-      {/* <div className="field">
-        <label htmlFor="position">Position</label>
-        <input id="position" name="position" className="input" placeholder="Position" onChange={handleChange} value={report.position || ''} />
-      </div> */}
       <div className="field">
         <label htmlFor="position">Position</label>
       </div>
@@ -108,6 +105,10 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect })
             </div>
           </div>
         </div>
+      </div>
+      <div className="field">
+        <label htmlFor="startingLocation">Starting Location</label>
+        <AutoComplete id="startingLocation" name="startingLocation" className="input" placeholder="Start Location" handlePlaceChange={handlePlaceChange} />
       </div>
       <button className="button is-primary">Submit</button>
     </form>

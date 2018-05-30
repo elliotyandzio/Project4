@@ -17,6 +17,12 @@ class TeamsNew extends React.Component {
     this.setState({ errors, [name]: value});
   }
 
+  handlePlaceChange = ({formatted_address, geometry: {location}}) => {
+    console.log(formatted_address);
+    console.log(location.toJSON());
+    this.setState({address: formatted_address, location: location.toJSON()});
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     axios.post(`/api/teams/${this.props.teamId}/players/${this.props.playerId}/reports`, this.state, {
@@ -30,6 +36,7 @@ class TeamsNew extends React.Component {
       handleChange={this.handleChange}
       handleSubmit={this.handleSubmit}
       handlePositionSelect={this.handlePositionSelect}
+      handlePlaceChange={this.handlePlaceChange}
     />;
   }
 }
