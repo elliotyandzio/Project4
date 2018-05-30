@@ -22,16 +22,17 @@ class TeamsIndex extends React.Component {
   }
 
   render() {
-    console.log(teamPlayers);
     const teamPlayers = this.state.teamPlayers;
+    console.log(teamPlayers);
     return(
       <div>
-        <button className="button is-danger" onClick={this.delete}>Delete</button>
+        {/* {!this.state.teamPlayers && <p>There is nothing yet. Please add some players</p>} */}
         {teamPlayers.map(player =>
           <Link key={player.name} to={`/teams/${this.props.match.params.id}/players/${player._id}`}>
             <h1>{player.name}</h1>
           </Link>
         )}
+        <button className="button is-danger" onClick={this.delete}>Delete</button>
       </div>
     );
   }

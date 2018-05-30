@@ -13,6 +13,7 @@ import SecureRoute from './components/common/SecureRoute';
 import FlashMessages from './components/common/FlashMessages';
 
 import 'bulma';
+import './scss/style.scss';
 
 class App extends React.Component {
 

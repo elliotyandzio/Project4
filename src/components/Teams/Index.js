@@ -15,6 +15,7 @@ class TeamsIndex extends React.Component {
   }
 
   handleToggle = () => {
+    console.log('in handleToggle indexjs');
     this.setState({ isOpen: !this.state.isOpen});
   }
 
@@ -56,10 +57,13 @@ class TeamsIndex extends React.Component {
           <div className="modal-card">
             <header className="modal-card-head">
               <p className="modal-card-title">Add a team</p>
-              <button onClick={this.handleToggle} className="delete" aria-label="close"></button>
+              <button onClick={() => this.setState({ isOpen: false })} className="delete" aria-label="close"></button>
             </header>
             <section className="modal-card-body">
-              <TeamsNew handleToggle={this.handleToggle}/>
+              <TeamsNew
+                isOpen={this.state.isOpen}
+                onClick={() => this.setState({ isOpen: false })}
+              />
             </section>
           </div>
         </div>

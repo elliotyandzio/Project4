@@ -1,5 +1,5 @@
 import React from 'react';
-import TeamForm from './Form';
+import ReportForm from './Form';
 import axios from 'axios';
 import Auth from '../lib/Auth';
 
@@ -8,25 +8,28 @@ class TeamsNew extends React.Component {
      errors: {}
    };
 
+  handlePositionSelect = (e) => {
+    this.setState({position: e.target.value});
+  }
+
   handleChange = ({ target: { name, value} }) => {
     const errors = { ...this.state.errors, [name]: ''};
     this.setState({ errors, [name]: value});
   }
 
-  handleSubmit = ( e ) => {
-    console.log('here!');
+  handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/teams', this.state, {
+    axios.post(`/api/teams/${this.props.teamId}/players/${this.props.playerId}/reports`, this.state, {
       headers: {Authorization: `Bearer ${Auth.getToken()}`}
-    })
-      .then(console.log('DATA======>',this.props.isOpen));
+    });
   }
 
   render()  {
-    return <TeamForm
-      teams={this.state}
+    return <ReportForm
+      report={this.state}
       handleChange={this.handleChange}
       handleSubmit={this.handleSubmit}
+      handlePositionSelect={this.handlePositionSelect}
     />;
   }
 }
