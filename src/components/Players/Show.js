@@ -128,6 +128,51 @@ class TeamsIndex extends React.Component {
               </div>
               <hr />
             </div>}
+
+            {report.position === 'Full Back' &&
+            <div className="FullBack-Results">
+              <h4 className="is-size-4">Full Back Report</h4>
+              <div className="columns">
+                <div className="column is-half-desktop">
+                  <p className="is-size-6"><span className="has-text-weight-bold">Receiving Techniques:</span> {report.receivingTechniques}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Turning:</span> {report.turning}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Running With The Ball:</span> {report.runningWithBall}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Finishing:</span> {report.finishing}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Interceptions:</span> {report.interceptions}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Blocking:</span> {report.blocking}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Passing Support:</span> {report.passingSupport}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Movement:</span> {report.mobilityMovement}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Improvisation:</span> {report.improvisation}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Pressure Support:</span> {report.pressureSupport}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Covering:</span> {report.coverBalance}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Pace:</span> {report.pace}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Endurance:</span> {report.endurance}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">First 5 Yards:</span> {report.first5}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Determination:</span> {report.determination}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Reaction To Error:</span> {report.errorReaction}/5</p>
+
+                </div>
+                <div className="column is-half-desktop">
+                  <p className="is-size-6"><span className="has-text-weight-bold">Range Of Passing:</span> {report.rangeOfPassing}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Dribbling:</span> {report.dribbling}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Crossing:</span> {report.crossing}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">1 Vs 1:</span> {report.oneVsOneDefending}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Tackling:</span> {report.tackling}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Heading:</span> {report.heading}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Depth Width:</span> {report.depthWidth}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Penetration:</span> {report.penetration}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Recovery Delay:</span> {report.recoveryDelay}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Compactness:</span> {report.compactness}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Restraint:</span> {report.controlRestraint}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Strength:</span> {report.strength}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Mobility:</span> {report.mobility}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Work Rate:</span> {report.workRate}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Taking on Information:</span> {report.takeInfo}/5</p>
+
+                </div>
+              </div>
+              <hr />
+            </div>}
             {Auth.getPayLoad().sub === report.createdBy &&
             <div className="id">
               <h4 className="is-size-4">Expenses</h4>
