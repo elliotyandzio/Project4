@@ -114,13 +114,193 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
           </div>
         </div>
       </div>
+
+      {/* GOALKEEPER FORM */}
       {report.position === 'Goalkeeper' &&
-      <div className="field">
-        <label htmlFor="distribution">Distribution</label>
-        <input type="range" min="1" max="5" className="input" name="distribution" onChange={handleChange} value={parseInt(report.distribution) || ''}/>
-        <p>{report.distribution}</p>
+        <div>
+          <hr />
+          <h2 className="is-size-2">{report.position}</h2>
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="distribution">Distribution</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="distribution" onChange={handleChange} value={parseInt(report.distribution) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.distribution}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="playingOutFromBack">Playing out</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="playingOutFromBack" onChange={handleChange} value={parseInt(report.playingOutFromBack) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.playingOutFromBack}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="backPass">Back Pass</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="backPass" onChange={handleChange} value={parseInt(report.backPass) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.backPass}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="attackingDecisionMaking">Atk Decisions</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="attackingDecisionMaking" onChange={handleChange} value={parseInt(report.attackingDecisionMaking) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.attackingDecisionMaking}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="handling">Handling</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="generalHandling" onChange={handleChange} value={parseInt(report.generalHandling) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.generalHandling}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="shotStopping">Shot stopping</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="shotStopping" onChange={handleChange} value={parseInt(report.shotStopping) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.shotStopping}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="dealingWithCrosses">Dealing with crosses</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="dealingWithCrosses" onChange={handleChange} value={parseInt(report.dealingWithCrosses) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.dealingWithCrosses}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="defensiveDecisionMaking">Def Decisions</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="defensiveDecisionMaking" onChange={handleChange} value={parseInt(report.defensiveDecisionMaking) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.defensiveDecisionMaking}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="switchingPlay">Switching Play</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="switchingPlay" onChange={handleChange} value={parseInt(report.switchingPlay) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.switchingPlay}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="playOutDecisions">Playing Out Decisions</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="playOutDecisions" onChange={handleChange} value={parseInt(report.playOutDecisions) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.playOutDecisions}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="counterAttacking">Counter Attacking</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="counterAttacking" onChange={handleChange} value={parseInt(report.counterAttacking) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.counterAttacking}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="supportDefenders">Support Defenders</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="supportDefenders" onChange={handleChange} value={parseInt(report.supportDefenders) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.supportDefenders}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="startingPositions">Starting Positions</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="startingPositions" onChange={handleChange} value={parseInt(report.startingPositions) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.startingPositions}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="distancesBetweenGKandDEF">Distance Between Def</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="distancesBetweenGKandDEF" onChange={handleChange} value={parseInt(report.distancesBetweenGKandDEF) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.distancesBetweenGKandDEF}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="understandingDefenders">Understanding Defenders</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="understandingDefenders" onChange={handleChange} value={parseInt(report.understandingDefenders) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.understandingDefenders}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="organisingSetPlays">Organising Set Plays</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="organisingSetPlays" onChange={handleChange} value={parseInt(report.organisingSetPlays) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.organisingSetPlays}
+            </div>
+          </div>
+
+        </div>
+        // END OF GOALKEEPER FORM
+      }
+
+      {/* FULL BACK FORM */}
+      {report.position === 'Full Back' &&
+      <div>
+
       </div>
       }
+         
+      <hr />
+      <h2 className="is-size-2">Expenses</h2>
       <div className="field">
         <label htmlFor="startLocation">Start Location</label>
         <AutoComplete id="startLocation" name="startLocation" className="input" placeholder="Start Location" handlePlaceChange={handleStartLocationChange}/>

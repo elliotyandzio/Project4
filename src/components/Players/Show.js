@@ -43,7 +43,7 @@ class TeamsIndex extends React.Component {
     //   .then(res => this.setState({player: res.data}));
 
     axios.get(`/api/teams/${this.props.match.params.id}/players/${this.props.match.params.playerId}`)
-      .then(res => this.setState({reports: res.data.reports}));
+      .then(res => this.setState({player: res.data }));
 
     this.setState({
       teamId: this.props.match.params.id,
@@ -69,20 +69,20 @@ class TeamsIndex extends React.Component {
           </div>
           <div className="tabs">
             <ul>
-              {this.state.reports && this.state.reports.map(report =>
+              {this.state.player.reports && this.state.player.reports.map(report =>
                 <li key={report._id}><a id={report._id} onClick={this.handleToggle}>Vs {report.opposition}</a></li>)}
             </ul>
           </div>
 
           {!this.state.id && <p>Please select a report</p>}
-          {this.state.reports && this.state.reports.map(report => this.state.id === report._id && <div>
+          {this.state.player.reports && this.state.player.reports.map(report => this.state.id === report._id && <div>
             <div className="columns">
               <div className="column is-half-desktop">
                 <h4 key={report._id} className="is-size-4">Game Info</h4>
               </div>
               {Auth.getPayLoad().sub === report.createdBy &&
               <div className="column is-half-desktop">
-                <button className="button is-danger"
+                <button className="button is-danger is-pulled-right"
                   onClick={() => this.handleReportDelete(report)}>
                   Delete Report
                 </button>
@@ -97,9 +97,37 @@ class TeamsIndex extends React.Component {
               <div className="column is-half-desktop">
                 <p className="is-size-6"><span className="has-text-weight-bold">Age Group:</span> {report.ageGroup}</p>
                 <p className="is-size-6"><span className="has-text-weight-bold">Footed:</span> {report.footed}</p>
+                <p className="is-size-6"><span className="has-text-weight-bold">Written By:</span> {report.createdBy}</p>
               </div>
             </div>
             <hr />
+            {report.position === 'Goalkeeper' &&
+            <div className="Goalkeeper-Results">
+              <h4 className="is-size-4">Goalkeeper Report</h4>
+              <div className="columns">
+                <div className="column is-half-desktop">
+                  <p className="is-size-6"><span className="has-text-weight-bold">Distribution:</span> {report.distribution}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Back Pass:</span> {report.backPass}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">General Handling:</span> {report.generalHandling}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Dealing With Crosses:</span> {report.dealingWithCrosses}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Switching Play:</span> {report.switchingPlay}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Counter Attacking:</span> {report.counterAttacking}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Starting Positions:</span> {report.startingPositions}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Understanding Defenders:</span> {report.understandingDefenders}/5</p>
+                </div>
+                <div className="column is-half-desktop">
+                  <p className="is-size-6"><span className="has-text-weight-bold">Playing Out From the Back:</span> {report.playingOutFromBack}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Attacking Decision Making:</span> {report.attackingDecisionMaking}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Shot Stopping:</span> {report.shotStopping}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Defensive Decision Making:</span> {report.defensiveDecisionMaking}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Playing Out Decisions:</span> {report.playOutDecisions}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Supporting Defenders:</span> {report.supportDefenders}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Distance Between Defenders:</span> {report.distancesBetweenGKandDEF}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Organising Set Plays:</span> {report.organisingSetPlays}/5</p>
+                </div>
+              </div>
+              <hr />
+            </div>}
             {Auth.getPayLoad().sub === report.createdBy &&
             <div className="id">
               <h4 className="is-size-4">Expenses</h4>
