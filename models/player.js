@@ -7,9 +7,9 @@ function isOutfieldPlayer() {
   return this.position !== 'Goalkeeper';
 }
 //
-// function isCentreBack() {
-//   return this.position === 'Centre Back';
-// }
+function isCentreBack() {
+  return this.position === 'Centre Back';
+}
 //
 // function isCentreMidfield() {
 //   return this.position === 'Centre Midfield';
@@ -101,9 +101,9 @@ const reportSchema = new mongoose.Schema({
   compactness: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
   coverBalance: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
   controlRestraint: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-//   headingAttackingSetPlays: {type: Number, min: 1, max: 5, required: isCentreBack},
-//   clearances: {type: Number, min: 1 , max: 5, required: isCentreBack },
-//   headingGeneralSetPlays: {type: Number, min: 1, max: 5, isCentreBack },
+  headingAttackingSetPlays: {type: Number, min: 1, max: 5, required: isCentreBack},
+  clearances: {type: Number, min: 1 , max: 5, required: isCentreBack },
+  headingGeneralSetPlays: {type: Number, min: 1, max: 5, isCentreBack },
 //   scoringTechniques: {type: Number, min: 1, max: 5, required: isFrontThree},
 //   pressuring: {type: Number, min: 1, max: 5, required: isFrontThree},
 //   forcingPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
@@ -117,7 +117,7 @@ const reportSchema = new mongoose.Schema({
   strength: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   endurance: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   mobility: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-//   jumping: {type: Number, min: 1, max: 5, required: heading},
+  jumping: {type: Number, min: 1, max: 5, required: heading},
 //   boxTobox: {type: Number, min: 1, max: 5, required: isCentreMidfield},
 //   strengthTackle: {type: Number, min: 1, max: 5, required: isCentreMidfield},
 //   secondBall: {type: Number, min: 1, max: 5, required: isCentreMidfield},
