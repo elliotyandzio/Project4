@@ -14,13 +14,15 @@ class TeamsNew extends React.Component {
 
   handleChange = ({ target: { name, value} }) => {
     const errors = { ...this.state.errors, [name]: ''};
-    this.setState({ errors, [name]: value});
+    this.setState({ errors, [name]: value}, () => console.log(this.state));
   }
 
-  handlePlaceChange = ({formatted_address, geometry: {location}}) => {
-    console.log(formatted_address);
-    console.log(location.toJSON());
-    this.setState({address: formatted_address, location: location.toJSON()});
+  handleStartLocationChange = ({ geometry: {location}}) => {
+    this.setState({ startLocation: location.toJSON() });
+  }
+
+  handleEndLocationChange = ({ geometry: {location}}) => {
+    this.setState({ endLocation: location.toJSON() });
   }
 
   handleSubmit = (e) => {
@@ -36,7 +38,8 @@ class TeamsNew extends React.Component {
       handleChange={this.handleChange}
       handleSubmit={this.handleSubmit}
       handlePositionSelect={this.handlePositionSelect}
-      handlePlaceChange={this.handlePlaceChange}
+      handleStartLocationChange={this.handleStartLocationChange}
+      handleEndLocationChange={this.handleEndLocationChange}
     />;
   }
 }

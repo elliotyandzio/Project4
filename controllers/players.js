@@ -63,6 +63,7 @@ function playerReportCreate(req, res, next) {
   console.log(req.body);
   Player
     .findById(req.params.playerId)
+    .populate('createdBy')
     .exec()
     .then(player => {
       player.reports.push(req.body);
@@ -72,19 +73,22 @@ function playerReportCreate(req, res, next) {
     .catch(next);
 }
 
-// function playerReportDelete(req, res, next) {
-//   Player
-//     .findById(req.params.id)
-//     .then(player => {
-//       const report = player.reports.id(req.params.reportId);
-//       // The throw new Error() takes you into the next catch block.
-//       if(!comment.createdBy._id.equals(req.currentUser._id)) throw new Error('Unauthorized');
-//       comment.remove();
-//       return burger.save();
-//     })
-//     .then(burger => res.json(burger))
-//     .catch(next);
-// }
+function playerReportDelete(req, res, next) {
+  Player
+    .findById(req.params.playerId)
+    .populate('createdBy')
+    .then(player => {
+      console.log(player.reports);
+      const report = player.reports.id(req.params.reportId);
+      if(!report.createdBy._id.equals(req.currentUser._id)) {
+        throw new Error('Unauthorized');
+      }
+      report.remove();
+      return player.save();
+    })
+    .then(player => res.json(player))
+    .catch(next);
+}
 
 module.exports = {
   index: indexRoute,
@@ -92,5 +96,6 @@ module.exports = {
   show: showRoute,
   update: updateRoute,
   delete: deleteRoute,
-  createReport: playerReportCreate
+  createReport: playerReportCreate,
+  deleteReport: playerReportDelete
 };

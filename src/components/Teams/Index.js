@@ -1,11 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import TeamsNew from './New';
+import TeamForm from './Form';
+import Auth from '../lib/Auth';
 
 class TeamsIndex extends React.Component {
   state = {
     teams: [],
+    team: {},
     isOpen: false
   }
 
@@ -15,17 +17,31 @@ class TeamsIndex extends React.Component {
   }
 
   handleToggle = () => {
-    console.log('in handleToggle indexjs');
     this.setState({ isOpen: !this.state.isOpen});
   }
 
-  componentWillUpdate() {
-    this.state.isOpen && this.setState({ isOpen: false });
+  handleChange = ({ target: { name, value} }) => {
+    const errors = { ...this.state.errors, [name]: ''};
+    const team = { ...this.state.team, [name]: value };
+    this.setState({ errors, team }, () => console.log(this.state));
+  }
+
+  handleSubmit = ( e ) => {
+    console.log('here!');
+    e.preventDefault();
+    axios.post('/api/teams', this.state.team, {
+      headers: {Authorization: `Bearer ${Auth.getToken()}`}
+    })
+      .then(res => {
+        const teams = this.state.teams.concat(res.data);
+        console.log('hello');
+        this.setState({ teams, isOpen: false, team: {} });
+      });
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h1 className="is-size-1 has-text-centered">Teams Index</h1>
         <button className="button is-success" onClick={this.handleToggle}>Add Team</button>
         <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth is-responsive">
@@ -38,7 +54,7 @@ class TeamsIndex extends React.Component {
           </thead>
           <tbody>
             {this.state.teams.map(teams =>
-              <tr key={teams.id}>
+              <tr key={teams._id}>
                 <td>{teams.name}</td>
                 <td>{teams.league}</td>
                 <td className="has-text-centered">
@@ -60,9 +76,10 @@ class TeamsIndex extends React.Component {
               <button onClick={() => this.setState({ isOpen: false })} className="delete" aria-label="close"></button>
             </header>
             <section className="modal-card-body">
-              <TeamsNew
-                isOpen={this.state.isOpen}
-                onClick={() => this.setState({ isOpen: false })}
+              <TeamForm
+                team={this.state.team}
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
               />
             </section>
           </div>

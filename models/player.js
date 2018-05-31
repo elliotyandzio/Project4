@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-// function isGoalKeeper() {
-//   return this.position === 'Goalkeeper';
-// }
+function isGoalKeeper() {
+  return this.position === 'Goalkeeper';
+}
 // function isOutfieldPlayer() {
 //   return this.position !== 'Goalkeeper';
 // }
@@ -37,9 +37,7 @@ const mongoose = require('mongoose');
 
 
 const reportSchema = new mongoose.Schema({
-  createdBy: {
-    type: mongoose.Schema.ObjectId, ref: 'User'
-  },
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User'},
   opposition: {
     type: String, required: true
   },
@@ -56,23 +54,31 @@ const reportSchema = new mongoose.Schema({
     type: String,
     enum: ['Goalkeeper', 'Full Back', 'Centre Back', 'Centre Midfield', 'Attacking Midfield', 'Winger', 'Striker'],
     required: true
-  }
-//   distribution: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   playingOutFromBack: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   backPass: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   attackingDecisionMaking: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   generalHandling: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   shotStopping: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   dealingWithCrosses: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   defensiveDecisionMaking: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   switchingPlay: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   playOutDecisions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   counterAttacking: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   supportDefenders: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   startingPositions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   distancesBetweenGKandDEF: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   understandingDefenders: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   organisingSetPlays: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  },
+  startLocation: {
+    lat: { type: Number },
+    lng: { type: Number }
+  },
+  endLocation: {
+    lat: { type: Number },
+    lng: { type: Number }
+  },
+  distribution: {type: String, min: 1, max: 5, required: isGoalKeeper }
+  // playingOutFromBack: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // backPass: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // attackingDecisionMaking: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // generalHandling: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // shotStopping: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // dealingWithCrosses: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // defensiveDecisionMaking: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // switchingPlay: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // playOutDecisions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // counterAttacking: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // supportDefenders: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // startingPositions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // distancesBetweenGKandDEF: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // understandingDefenders: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  // organisingSetPlays: {type: Number, min: 1, max: 5, required: isGoalKeeper }
 //   recivingTechniques: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
 //   rangeOfPassing: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer },
 //   turning: {type: Number, min: 1, max: 5, required: isAttackingPlayer },
