@@ -34,7 +34,6 @@ class TeamsIndex extends React.Component {
     })
       .then(res => {
         const teams = this.state.teams.concat(res.data);
-        console.log('hello');
         this.setState({ teams, isOpen: false, team: {} });
       });
   }

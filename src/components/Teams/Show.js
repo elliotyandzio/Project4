@@ -17,7 +17,6 @@ class TeamsIndex extends React.Component {
   }
 
   handleToggle = () => {
-    console.log('in handleToggle showjs');
     this.setState({ isOpen: !this.state.isOpen});
   }
 
@@ -44,22 +43,43 @@ class TeamsIndex extends React.Component {
     const teamPlayers = this.state.teamPlayers;
     return(
       <div className="container">
-        {/* {!this.state.teamPlayers && <p>There is nothing yet. Please add some players</p>} */}
-        {teamPlayers.map(player =>
-          <Link key={player.name}
-            to={`/teams/${this.props.match.params.id}/players/${player._id}`}>
-            <h1>{player.name}</h1>
-          </Link>
-        )}
-        <button className="button is-danger" onClick={this.delete}>Delete</button>
-        <button className="button is-success" onClick={this.handleToggle}>Add Team</button>
+
+        <div  className="columns">
+          <div className="column is-8 is-offset-2">
+            <h1 className="is-size-1 has-text-centered">Players</h1>
+            <nav className="panel">
+              {teamPlayers.length === 0 &&
+              <a className="panel-block is-centered">
+                <div>
+                  <p className="has-size-5 has-text-black">This team doesnt have any players please add a player</p>
+                </div>
+              </a>}
+              {teamPlayers.map(player =>
+                <a key={player.name} className="panel-block is-centered">
+                  <Link
+                    className="has-size-5 has-text-black"
+                    to={`/teams/${this.props.match.params.id}/players/${player._id}`}>
+                    <h1>{player.name}</h1>
+                  </Link>
+                </a>
+              )}
+              <div className="panel-block">
+                <button className="button is-success is-fullwidth" onClick={this.handleToggle}>Add Player</button>
+              </div>
+              <div className="panel-block">
+                <button className="button is-danger is-fullwidth" onClick={this.delete}>Delete Team</button>
+              </div>
+            </nav>
+          </div>
+        </div>
+
 
         {/* Start of the new team modal */}
         <div className={`modal ${this.state.isOpen ? 'is-active' : ''}`}>
           <div className="modal-background"></div>
           <div className="modal-card">
             <header className="modal-card-head">
-              <p className="modal-card-title">Add a team</p>
+              <p className="modal-card-title">Add a Player</p>
               <button onClick={() => this.setState({ isOpen: false })} className="delete" aria-label="close"></button>
             </header>
             <section className="modal-card-body">

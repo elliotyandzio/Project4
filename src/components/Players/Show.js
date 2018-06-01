@@ -3,7 +3,7 @@ import axios from 'axios';
 import ReportsNew from '../Reports/New';
 import Map from '../common/Maps';
 import Auth from '../lib/Auth';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class TeamsIndex extends React.Component {
   state = {
@@ -29,7 +29,6 @@ class TeamsIndex extends React.Component {
     axios.delete(`/api/teams/${this.state.teamId}/players/${this.state.playerId}/reports/${report._id}`, {
       headers: {Authorization: `Bearer ${Auth.getToken()}`}
     })
-      .then(console.log('teamId--->', this.state.teamId, 'playerId--->', this.state.playerId, 'reportId-->', report._id))
       .then(res => this.setState({ reports: res.data.reports}));
   }
 
@@ -63,8 +62,13 @@ class TeamsIndex extends React.Component {
             <div className="column is-half">
               <h2 className="is-size-2">Reports:</h2>
             </div>
+
             <div className="column is-half">
-              <button className="button is-success is-pulled-right" onClick={this.handleModalToggle}>Add Report</button>
+              <Link to={`/teams/${this.props.match.params.id}/players/${this.props.match.params.playerId}/reports`}>
+                <button className="button is-success is-pulled-right">Add Report</button>
+              </Link>
+              {/* <button className="button is-success is-pulled-right" onClick={this.handleModalToggle}>
+                Add Report</button> */}
             </div>
           </div>
           <div className="tabs">
@@ -168,6 +172,7 @@ class TeamsIndex extends React.Component {
                   <p className="is-size-6"><span className="has-text-weight-bold">Mobility:</span> {report.mobility}/5</p>
                   <p className="is-size-6"><span className="has-text-weight-bold">Work Rate:</span> {report.workRate}/5</p>
                   <p className="is-size-6"><span className="has-text-weight-bold">Taking on Information:</span> {report.takeInfo}/5</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Tracking:</span> {report.tracking}/5</p>
 
                 </div>
               </div>

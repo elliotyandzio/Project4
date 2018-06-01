@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-import TeamsIndex from './components/teams/Index';
-import TeamsShow from './components/teams/Show';
-import PlayersShow from './components/players/Show';
+import TeamsIndex from './components/Teams/Index';
+import TeamsShow from './components/Teams/Show';
+import PlayersShow from './components/Players/Show';
+import ReportsNew from './components/Reports/New';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import AuthRegister from './components/Auth/Register';
@@ -24,6 +25,7 @@ class App extends React.Component {
           <Navbar />
           <FlashMessages />
           <Switch>
+            <SecureRoute path="/teams/:id/players/:playerId/reports" component={ReportsNew} />
             <SecureRoute path="/teams/:id/players/:playerId" component={PlayersShow} />
             <SecureRoute path="/teams/:id" component={TeamsShow} />
             <SecureRoute path="/teams" component={TeamsIndex} />

@@ -27,9 +27,10 @@ class TeamsNew extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`/api/teams/${this.props.teamId}/players/${this.props.playerId}/reports`, this.state, {
+    axios.post(`/api/teams/${this.props.match.params.id}/players/${this.props.match.params.playerId}/reports`, this.state, {
       headers: {Authorization: `Bearer ${Auth.getToken()}`}
-    });
+    })
+      .then(() => this.props.history.push(`teams/${this.props.match.params.id}/players/${this.props.match.params.playerId}`));
   }
 
   render()  {
