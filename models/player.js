@@ -11,9 +11,9 @@ function isCentreBack() {
   return this.position === 'Centre Back';
 }
 //
-// function isCentreMidfield() {
-//   return this.position === 'Centre Midfield';
-// }
+function isCentreMidfield() {
+  return this.position === 'Centre Midfield';
+}
 //
 function isNotAttackingPlayer() {
   return ['Full Back', 'Center Back', 'Centre Midfield'].includes(this.position);
@@ -27,13 +27,13 @@ function isAttackingPlayer() {
   return ['Full Back' ,'Centre Midfield' ,'Winger' ,'Striker' ,'Attacking Midfield'].includes(this.position);
 }
 //
-// function isFrontThree() {
-//   return ['Winger' ,'Striker' ,'Attacking Midfield'].includes(this.position);
-// }
+function isFrontThree() {
+  return ['Winger' ,'Striker' ,'Attacking Midfield'].includes(this.position);
+}
 //
-// function heading() {
-//   return ['Centre Back', 'Striker'];
-// }
+function heading() {
+  return ['Centre Back', 'Striker'].includes(this.position);
+}
 
 
 const reportSchema = new mongoose.Schema({
@@ -104,12 +104,12 @@ const reportSchema = new mongoose.Schema({
   headingAttackingSetPlays: {type: Number, min: 1, max: 5, required: isCentreBack},
   clearances: {type: Number, min: 1 , max: 5, required: isCentreBack },
   headingGeneralSetPlays: {type: Number, min: 1, max: 5, isCentreBack },
-//   scoringTechniques: {type: Number, min: 1, max: 5, required: isFrontThree},
-//   pressuring: {type: Number, min: 1, max: 5, required: isFrontThree},
-//   forcingPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
-//   recoveryRun: {type: Number, min: 1, max: 5, required: isFrontThree},
-//   tracking: {type: Number, min: 1, max: 5, required: isAttackingPlayer},
-//   linkPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
+  scoringTechniques: {type: Number, min: 1, max: 5, required: isFrontThree},
+  pressuring: {type: Number, min: 1, max: 5, required: isFrontThree},
+  forcingPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
+  recoveryRun: {type: Number, min: 1, max: 5, required: isFrontThree},
+  tracking: {type: Number, min: 1, max: 5, required: isAttackingPlayer},
+  linkPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
 //   presence: {type: Number, min: 1, max: 5, required: isGoalKeeper },
 //   agility: {type: Number, min: 1, max: 5, required: isGoalKeeper },
 //   speedOffLine: {type: Number, min: 1, max: 5, required: isGoalKeeper },
@@ -118,11 +118,11 @@ const reportSchema = new mongoose.Schema({
   endurance: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   mobility: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   jumping: {type: Number, min: 1, max: 5, required: heading},
-//   boxTobox: {type: Number, min: 1, max: 5, required: isCentreMidfield},
-//   strengthTackle: {type: Number, min: 1, max: 5, required: isCentreMidfield},
-//   secondBall: {type: Number, min: 1, max: 5, required: isCentreMidfield},
+  boxTobox: {type: Number, min: 1, max: 5, required: isCentreMidfield},
+  strengthTackle: {type: Number, min: 1, max: 5, required: isCentreMidfield},
+  secondBall: {type: Number, min: 1, max: 5, required: isCentreMidfield},
   first5: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-//   chnageOfDirection: {type: Number, min: 1, max: 5, required: isFrontThree},
+  changeOfDirection: {type: Number, min: 1, max: 5, required: isFrontThree},
 //   bravery: {type: Number, min: 1, max: 5, required: isGoalKeeper },
 //   communication: {type: Number, min: 1, max: 5, required: isGoalKeeper },
 //   commandOfBox: {type: Number, min: 1, max: 5, required: isGoalKeeper },

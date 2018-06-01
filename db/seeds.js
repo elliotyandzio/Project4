@@ -19,7 +19,7 @@ mongoose.connect(dbURI, (err, db) => {
       name: 'Mesut Ozil'
     }]
   },{
-    name: 'Manchest United',
+    name: 'Manchester United',
     league: 'Premier League',
     players: [{
       name: 'Paul Pogba'
