@@ -1,9 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import ReportsNew from '../Reports/New';
+//import ReportsNew from '../Reports/New';
 import Map from '../common/Maps';
 import Auth from '../lib/Auth';
 import { Link } from 'react-router-dom';
+import GoalkeeperTechnicalChart from '../Charts/GoalkeeperTechnical';
+import GoalkeeperTacticalChart from '../Charts/GoalkeeperTactical';
+import GoalkeeperMentalChart from '../Charts/GoalkeeperMental';
+import GoalkeeperPhysicalChart from '../Charts/GoalkeeperPhysical';
 
 class TeamsIndex extends React.Component {
   state = {
@@ -110,24 +114,28 @@ class TeamsIndex extends React.Component {
               <h4 className="is-size-4">Goalkeeper Report</h4>
               <div className="columns">
                 <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Distribution:</span> {report.distribution}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Back Pass:</span> {report.backPass}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">General Handling:</span> {report.generalHandling}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Dealing With Crosses:</span> {report.dealingWithCrosses}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Switching Play:</span> {report.switchingPlay}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Counter Attacking:</span> {report.counterAttacking}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Starting Positions:</span> {report.startingPositions}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Understanding Defenders:</span> {report.understandingDefenders}/5</p>
+                  <h4 className="is-size-4 has-text-centered">Technical</h4>
+                  <GoalkeeperTechnicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                  <h4 className="is-size-4 has-text-centered">Tactical</h4>
+                  <GoalkeeperTacticalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
                 </div>
                 <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Playing Out From the Back:</span> {report.playingOutFromBack}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Attacking Decision Making:</span> {report.attackingDecisionMaking}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Shot Stopping:</span> {report.shotStopping}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Defensive Decision Making:</span> {report.defensiveDecisionMaking}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Playing Out Decisions:</span> {report.playOutDecisions}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Supporting Defenders:</span> {report.supportDefenders}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Distance Between Defenders:</span> {report.distancesBetweenGKandDEF}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Organising Set Plays:</span> {report.organisingSetPlays}/5</p>
+                  <h4 className="is-size-4 has-text-centered">Mental</h4>
+                  <GoalkeeperMentalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                  <h4 className="is-size-4 has-text-centered">Physical</h4>
+                  <GoalkeeperPhysicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
                 </div>
               </div>
               <hr />
@@ -332,7 +340,7 @@ class TeamsIndex extends React.Component {
 
 
           {/* Start of the new team modal */}
-          <div className={`modal ${this.state.modalIsOpen ? 'is-active' : ''}`}>
+          {/* <div className={`modal ${this.state.modalIsOpen ? 'is-active' : ''}`}>
             <div className="modal-background"></div>
             <div className="modal-card">
               <header className="modal-card-head">
@@ -346,7 +354,7 @@ class TeamsIndex extends React.Component {
                 />
               </section>
             </div>
-          </div>
+          </div> */}
           {/* End of the new team modal */}
 
 

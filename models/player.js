@@ -63,22 +63,40 @@ const reportSchema = new mongoose.Schema({
     lat: { type: Number },
     lng: { type: Number }
   },
+  //GOALKEEPER FIELDS
+  //TECHNICAL
   distribution: {type: String, min: 1, max: 5, required: isGoalKeeper },
-  playingOutFromBack: {type: String, min: 1, max: 5, required: isGoalKeeper },
   backPass: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-  attackingDecisionMaking: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-  generalHandling: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-  shotStopping: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   dealingWithCrosses: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-  defensiveDecisionMaking: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-  switchingPlay: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-  playOutDecisions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  shotStopping: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  generalHandling: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  playingOutFromBack: {type: String, min: 1, max: 5, required: isGoalKeeper },
+  //TACTICAL
   counterAttacking: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   supportDefenders: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-  startingPositions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  playOutDecisions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   distancesBetweenGKandDEF: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-  understandingDefenders: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   organisingSetPlays: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  startingPositions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  //MENTAL
+  bravery: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  communication: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  commandOfBox: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  errorProne: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  //Error reaction below
+  //PHYSICAL
+  presence: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  agility: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  speedOffLine: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  reach: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  reactions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  //OVERALL
+  // technicalRating: {type: Number, min: 1, max: 5, required: true },
+  // tacticalRating: { type: Number, min: 1, max: 5, required: true},
+  // physcialRating: { type: Number, min: 1, max: 5, required: true},
+  // mentalRating: { type: Number, min: 1, max: 5, required: true },
+
+  // END OF GOALKEEPER
   receivingTechniques: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
   rangeOfPassing: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer },
   turning: {type: Number, min: 1, max: 5, required: isAttackingPlayer },
@@ -110,9 +128,7 @@ const reportSchema = new mongoose.Schema({
   recoveryRun: {type: Number, min: 1, max: 5, required: isFrontThree},
   tracking: {type: Number, min: 1, max: 5, required: isAttackingPlayer},
   linkPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
-//   presence: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   agility: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   speedOffLine: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+
   pace: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   strength: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   endurance: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
@@ -123,18 +139,12 @@ const reportSchema = new mongoose.Schema({
   secondBall: {type: Number, min: 1, max: 5, required: isCentreMidfield},
   first5: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   changeOfDirection: {type: Number, min: 1, max: 5, required: isFrontThree},
-//   bravery: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   communication: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   commandOfBox: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-//   errorProne: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+
   workRate: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   determination: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   takeInfo: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  errorReaction: {type: Number, min: 1, max: 5, required: isOutfieldPlayer}
-//   technicalRating: {type: Number, min: 1, max: 5, required: true },
-//   tacticalRating: { type: Number, min: 1, max: 5, required: true},
-//   physcialRating: { type: Number, min: 1, max: 5, required: true},
-//   mentalRating: { type: Number, min: 1, max: 5, required: true },
+  errorReaction: {type: Number, min: 1, max: 5, required: true}
+
 //   overallRating: { type: Number, min: 1, max: 5, required: true },
 //   comments: { type: String }
 });
