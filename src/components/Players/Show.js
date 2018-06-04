@@ -86,7 +86,7 @@ class TeamsIndex extends React.Component {
           {this.state.player.reports && this.state.player.reports.map(report => this.state.id === report._id && <div>
             <div className="columns">
               <div className="column is-half-desktop">
-                <h4 key={report._id} className="is-size-4">Game Info</h4>
+                <h4 key={report._id} className="is-size-3">Game Info</h4>
               </div>
               {Auth.getPayLoad().sub === report.createdBy &&
               <div className="column is-half-desktop">
@@ -111,27 +111,29 @@ class TeamsIndex extends React.Component {
             <hr />
             {report.position === 'Goalkeeper' &&
             <div className="Goalkeeper-Results">
-              <h4 className="is-size-4">Goalkeeper Report</h4>
+              <h4 className="is-size-3">Goalkeeper Report</h4>
               <div className="columns">
                 <div className="column is-half-desktop">
-                  <h4 className="is-size-4 has-text-centered">Technical</h4>
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
                   <GoalkeeperTechnicalChart
                     id={this.state.id}
                     reports={this.state.player.reports}
                   />
-                  <h4 className="is-size-4 has-text-centered">Tactical</h4>
-                  <GoalkeeperTacticalChart
+                  <br />
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Mental</h4>
+                  <GoalkeeperMentalChart
                     id={this.state.id}
                     reports={this.state.player.reports}
                   />
                 </div>
                 <div className="column is-half-desktop">
-                  <h4 className="is-size-4 has-text-centered">Mental</h4>
-                  <GoalkeeperMentalChart
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Tactical</h4>
+                  <GoalkeeperTacticalChart
                     id={this.state.id}
                     reports={this.state.player.reports}
                   />
-                  <h4 className="is-size-4 has-text-centered">Physical</h4>
+                  <br />
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Physical</h4>
                   <GoalkeeperPhysicalChart
                     id={this.state.id}
                     reports={this.state.player.reports}
@@ -321,7 +323,7 @@ class TeamsIndex extends React.Component {
 
             {Auth.getPayLoad().sub === report.createdBy &&
             <div className="id">
-              <h4 className="is-size-4">Expenses</h4>
+              <h4 className="is-size-3">Expenses</h4>
               <div className="columns">
                 <div className="column is-half-desktop">
                   <p className="is-size-6"><span className="has-text-weight-bold">Distance:</span> {(parseFloat(this.state.distance)/1000).toFixed(2)}km</p>
