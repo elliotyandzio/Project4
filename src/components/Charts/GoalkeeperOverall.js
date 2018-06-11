@@ -1,7 +1,7 @@
 import React from 'react';
 import Chart from 'chart.js';
 
-class TechnicalChart extends React.Component {
+class GoalkeeperMentalChart extends React.Component {
 
   state = {
     report: {}
@@ -16,21 +16,21 @@ class TechnicalChart extends React.Component {
   }
 
   componentDidUpdate = () => {
-    const arrayData = [this.state.report.pace, this.state.report.strength, this.state.report.mobility, this.state.report.first5];
-    console.log(arrayData);
+    const arrayData = [this.state.report.technicalRating, this.state.report.tacticalRating, this.state.report.mentalRating, this.state.report.physicalRating];
 
-    const ctx = document.getElementById('myChart');
+
+    const ctx = document.getElementById('goalkeeperOverall');
     const myRadarChart = new Chart(ctx, { // eslint-disable-line
       type: 'radar',
       data: {
-        labels: ['Pace', 'Strength', 'Mobility', 'First 5 Yards'],
+        labels: ['Technical', 'Tactical', 'Mental', 'Physical'],
         datasets: [{
-          borderColor: 'rgb(255,140,0)',
-          backgroundColor: 'rgba(255,140,0, 0.6)',
+          borderColor: 'rgb(51,0,102)',
+          backgroundColor: 'rgba(51,0,102,0.6)',
           radius: 6,
           pointRadius: 6,
           pointBorderWidth: 3,
-          pointBorderColor: 'rgb(255,140,0)',
+          pointBorderColor: 'rgb(51,0,102)',
           pointBackgroundColor: 'transparent',
           data: arrayData
         }]
@@ -68,10 +68,10 @@ class TechnicalChart extends React.Component {
   render() {
     return(
       <div>
-        <canvas id="myChart"></canvas>
+        <canvas id="goalkeeperOverall"></canvas>
       </div>
     );
   }
 }
 
-export default TechnicalChart;
+export default GoalkeeperMentalChart;

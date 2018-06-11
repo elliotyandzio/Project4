@@ -17,7 +17,6 @@ class GoalkeeperPhysicalChart extends React.Component {
 
   componentDidUpdate = () => {
     const arrayData = [this.state.report.presence, this.state.report.agility, this.state.report.speedOffLine, this.state.report.reach, this.state.report.reactions];
-    console.log(arrayData);
 
     const ctx = document.getElementById('goalkeeperPhysical');
     const myRadarChart = new Chart(ctx, { // eslint-disable-line

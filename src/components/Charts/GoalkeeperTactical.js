@@ -17,7 +17,6 @@ class GoalkeeperTacticalChart extends React.Component {
 
   componentDidUpdate = () => {
     const arrayData = [this.state.report.counterAttacking, this.state.report.supportDefenders, this.state.report.playOutDecisions, this.state.report.distancesBetweenGKandDEF, this.state.report.organisingSetPlays, this.state.report.startingPositions];
-    console.log(arrayData);
 
     const ctx = document.getElementById('goalkeeperTactical');
     const myRadarChart = new Chart(ctx, { // eslint-disable-line

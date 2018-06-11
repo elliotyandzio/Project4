@@ -65,12 +65,12 @@ const reportSchema = new mongoose.Schema({
   },
   //GOALKEEPER FIELDS
   //TECHNICAL
-  distribution: {type: String, min: 1, max: 5, required: isGoalKeeper },
+  distribution: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   backPass: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   dealingWithCrosses: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   shotStopping: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   generalHandling: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-  playingOutFromBack: {type: String, min: 1, max: 5, required: isGoalKeeper },
+  playingOutFromBack: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   //TACTICAL
   counterAttacking: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   supportDefenders: {type: Number, min: 1, max: 5, required: isGoalKeeper },
@@ -91,10 +91,10 @@ const reportSchema = new mongoose.Schema({
   reach: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   reactions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   //OVERALL
-  // technicalRating: {type: Number, min: 1, max: 5, required: true },
-  // tacticalRating: { type: Number, min: 1, max: 5, required: true},
-  // physcialRating: { type: Number, min: 1, max: 5, required: true},
-  // mentalRating: { type: Number, min: 1, max: 5, required: true },
+  technicalRating: {type: String, min: 1, max: 5, required: isGoalKeeper },
+  tacticalRating: { type: Number, min: 1, max: 5, required: isGoalKeeper},
+  physicalRating: { type: Number, min: 1, max: 5, required: isGoalKeeper},
+  mentalRating: { type: Number, min: 1, max: 5, required: isGoalKeeper },
 
   // END OF GOALKEEPER
   receivingTechniques: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },

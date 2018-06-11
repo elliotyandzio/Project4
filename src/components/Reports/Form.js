@@ -3,6 +3,38 @@ import AutoComplete from '../common/AutoComplete';
 
 const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, handleStartLocationChange, handleEndLocationChange }) => {
 
+  const technicalOverall = () => {
+    if(typeof report.distribution !== 'undefined' && typeof report.backPass !== 'undefined' && typeof report.dealingWithCrosses !== 'undefined' && typeof report.shotStopping !== 'undefined' && typeof report.generalHandling !== 'undefined' && typeof report.playingOutFromBack !== 'undefined') {
+      const values = (parseInt(report.distribution) + parseInt(report.backPass) + parseInt(report.dealingWithCrosses) + parseInt(report.shotStopping) + parseInt(report.generalHandling) + parseInt(report.playingOutFromBack));
+      const overall = Math.round(values/6);
+      return overall;
+    }
+  };
+
+  const tacticalOverall = () => {
+    if(typeof report.counterAttacking !== 'undefined' && typeof report.supportDefenders !== 'undefined' && typeof report.playOutDecisions !== 'undefined' && typeof report.distancesBetweenGKandDEF !== 'undefined' && typeof report.organisingSetPlays !== 'undefined' && typeof report.startingPositions !== 'undefined') {
+      const values = (parseInt(report.counterAttacking) + parseInt(report.supportDefenders) + parseInt(report.playOutDecisions) + parseInt(report.distancesBetweenGKandDEF) + parseInt(report.organisingSetPlays) + parseInt(report.startingPositions));
+      const overall = Math.round(values/6);
+      return overall;
+    }
+  };
+
+  const mentalOverall = () => {
+    if(typeof report.bravery !== 'undefined' && typeof report.communication !== 'undefined' && typeof report.commandOfBox !== 'undefined' && typeof report.errorProne !== 'undefined' && typeof report.errorReaction !== 'undefined') {
+      const values = (parseInt(report.bravery) + parseInt(report.communication) + parseInt(report.commandOfBox) + parseInt(report.errorProne) + parseInt(report.errorReaction));
+      const overall = Math.round(values/5);
+      return overall;
+    }
+  };
+
+  const physicalOverall = () => {
+    if(typeof report.presence !== 'undefined' && typeof report.agility !== 'undefined' && typeof report.speedOffLine !== 'undefined' && typeof report.reach !== 'undefined' && typeof report.reactions !== 'undefined') {
+      const values = (parseInt(report.presence) + parseInt(report.agility) + parseInt(report.speedOffLine) + parseInt(report.reach) + parseInt(report.reactions));
+      const overall = Math.round(values/5);
+      return overall;
+    }
+  };
+
   return (
     <div className="container">
       <h1 className="is-size-1 has-text-centered">New Report</h1>
@@ -144,7 +176,8 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
           <div>
             <hr />
             <h2 className="is-size-2">{report.position}</h2>
-            <h4 className="is-size-4">Technical</h4>
+            <h4 className="is-size-4">Technical - <span>{technicalOverall()}</span></h4>
+            <input type="number" className="is-invisible" name="technicalRating" onChange={handleChange} value={parseInt(report.technicalRating = technicalOverall()) || ''}/>
             <div className="columns">
               <div className="column is-2">
                 <label htmlFor="distribution">Distribution</label>
@@ -209,8 +242,8 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
             </div>
 
             <hr />
-            <h4 className="is-size-4">Tactical</h4>
-
+            <h4 className="is-size-4">Tactical - <span>{tacticalOverall()}</span></h4>
+            <input type="number" className="is-invisible" name="tacticalRating" onChange={handleChange} value={parseInt(report.tacticalRating = tacticalOverall()) || ''}/>
             <div className="columns">
               <div className="column is-2">
                 <label htmlFor="counterAttacking">Counter Attacking</label>
@@ -275,8 +308,8 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
             </div>
 
             <hr />
-            <h4 className="is-size-4">Mental</h4>
-
+            <h4 className="is-size-4">Mental - <span>{mentalOverall()}</span></h4>
+            <input type="number" className="is-invisible" name="mentalRating" onChange={handleChange} value={parseInt(report.mentalRating = mentalOverall()) || ''}/>
             <div className="columns">
               <div className="column is-2">
                 <label htmlFor="bravery">Bravery</label>
@@ -332,8 +365,8 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
             </div>
 
             <hr />
-            <h4 className="is-size-4">Physical</h4>
-
+            <h4 className="is-size-4">Physical - <span>{physicalOverall()}</span></h4>
+            <input type="number" className="is-invisible" name="physicalRating" onChange={handleChange} value={parseInt(report.physicalRating = physicalOverall()) || ''}/>
             <div className="columns">
               <div className="column is-2">
                 <label htmlFor="presence">Presence</label>

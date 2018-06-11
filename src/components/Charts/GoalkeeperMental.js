@@ -17,7 +17,6 @@ class GoalkeeperMentalChart extends React.Component {
 
   componentDidUpdate = () => {
     const arrayData = [this.state.report.bravery, this.state.report.communication, this.state.report.commandOfBox, this.state.report.errorProne, this.state.report.errorReaction];
-    console.log(arrayData);
 
     const ctx = document.getElementById('goalkeeperMental');
     const myRadarChart = new Chart(ctx, { // eslint-disable-line

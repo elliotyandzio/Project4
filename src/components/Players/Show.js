@@ -8,6 +8,7 @@ import GoalkeeperTechnicalChart from '../Charts/GoalkeeperTechnical';
 import GoalkeeperTacticalChart from '../Charts/GoalkeeperTactical';
 import GoalkeeperMentalChart from '../Charts/GoalkeeperMental';
 import GoalkeeperPhysicalChart from '../Charts/GoalkeeperPhysical';
+import GoalkeeperOverallChart from '../Charts/GoalkeeperOverall';
 
 class TeamsIndex extends React.Component {
   state = {
@@ -105,13 +106,17 @@ class TeamsIndex extends React.Component {
               <div className="column is-half-desktop">
                 <p className="is-size-6"><span className="has-text-weight-bold">Age Group:</span> {report.ageGroup}</p>
                 <p className="is-size-6"><span className="has-text-weight-bold">Footed:</span> {report.footed}</p>
-                <p className="is-size-6"><span className="has-text-weight-bold">Written By:</span> {report.createdBy}</p>
+                <p className="is-size-6"><span className="has-text-weight-bold">Written By:</span> {console.log(report)}</p>
               </div>
             </div>
             <hr />
             {report.position === 'Goalkeeper' &&
             <div className="Goalkeeper-Results">
               <h4 className="is-size-3">Goalkeeper Report</h4>
+              <GoalkeeperOverallChart
+                id={this.state.id}
+                reports={this.state.player.reports}
+              />
               <div className="columns">
                 <div className="column is-half-desktop">
                   <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
