@@ -17,7 +17,6 @@ class GoalkeeperTechnicalChart extends React.Component {
 
   componentDidUpdate = () => {
     const arrayData = [this.state.report.distribution, this.state.report.backPass, this.state.report.dealingWithCrosses, this.state.report.shotStopping, this.state.report.generalHandling, this.state.report.playingOutFromBack];
-    console.log(arrayData);
 
     const ctx = document.getElementById('goalkeeperTechnical');
     const myRadarChart = new Chart(ctx, { // eslint-disable-line

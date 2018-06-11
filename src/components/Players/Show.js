@@ -9,6 +9,7 @@ import GoalkeeperTacticalChart from '../Charts/GoalkeeperTactical';
 import GoalkeeperMentalChart from '../Charts/GoalkeeperMental';
 import GoalkeeperPhysicalChart from '../Charts/GoalkeeperPhysical';
 import GoalkeeperOverallChart from '../Charts/GoalkeeperOverall';
+import GoalkeeperChart from '../Charts/GK';
 
 class TeamsIndex extends React.Component {
   state = {
@@ -18,7 +19,7 @@ class TeamsIndex extends React.Component {
     id: '',       //id for the tabs
     modalIsOpen: false, //isOpen for the modal
     teamId: '',  //stores the team id from the url
-    playerId: '' //stores the player id from the url
+    playerId: '', //stores the player id from the url
   }
 
 
@@ -40,6 +41,7 @@ class TeamsIndex extends React.Component {
   componentWillUpdate() {
     this.state.isOpen && this.setState({ isOpen: false });
     this.state.modalIsOpen && this.setState({ modalIsOpen: false });
+
   }
 
   componentDidMount() {
@@ -54,6 +56,7 @@ class TeamsIndex extends React.Component {
       playerId: this.props.match.params.playerId
     });
   }
+
 
     getDistance = (distanceVal) => {
       this.setState({ distance: distanceVal });
@@ -83,7 +86,25 @@ class TeamsIndex extends React.Component {
             </ul>
           </div>
 
-          {!this.state.id && <p>Please select a report</p>}
+          <div className="has-text-centered">
+            <h4 className="is-size-4 has-text-weight-bold">Average Stats for {this.state.player.name}</h4>
+            {!this.state.id && this.state.player.reports &&
+                <div className="has-text-centered">
+                  {this.state.player.reports.map(report => <div key={report._id}>
+                    {report.position === 'Goalkeeper' &&
+                      <div >
+                        <GoalkeeperChart
+                          name={this.state.player.name}
+                          reports={this.state.player.reports}
+                        />
+                      </div>
+                    }
+                  </div>
+                  )}
+                </div>
+            }
+          </div>
+
           {this.state.player.reports && this.state.player.reports.map(report => this.state.id === report._id && <div>
             <div className="columns">
               <div className="column is-half-desktop">
@@ -111,6 +132,7 @@ class TeamsIndex extends React.Component {
             </div>
             <hr />
             {report.position === 'Goalkeeper' &&
+
             <div className="Goalkeeper-Results">
               <h4 className="is-size-3">Goalkeeper Report</h4>
               <GoalkeeperOverallChart
