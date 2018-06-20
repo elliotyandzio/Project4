@@ -7,14 +7,14 @@ function isOutfieldPlayer() {
   return this.position !== 'Goalkeeper';
 }
 //
-function isCentreBack() {
-  return this.position === 'Centre Back';
-}
-//
-function isCentreMidfield() {
-  return this.position === 'Centre Midfield';
-}
-//
+// function isCentreBack() {
+//   return this.position === 'Centre Back';
+// }
+// //
+// function isCentreMidfield() {
+//   return this.position === 'Centre Midfield';
+// }
+// //
 function isNotAttackingPlayer() {
   return ['Full Back', 'Center Back', 'Centre Midfield'].includes(this.position);
 }
@@ -27,13 +27,13 @@ function isAttackingPlayer() {
   return ['Full Back' ,'Centre Midfield' ,'Winger' ,'Striker' ,'Attacking Midfield'].includes(this.position);
 }
 //
-function isFrontThree() {
-  return ['Winger' ,'Striker' ,'Attacking Midfield'].includes(this.position);
-}
-//
-function heading() {
-  return ['Centre Back', 'Striker'].includes(this.position);
-}
+// function isFrontThree() {
+//   return ['Winger' ,'Striker' ,'Attacking Midfield'].includes(this.position);
+// }
+// //
+// function heading() {
+//   return ['Centre Back', 'Striker'].includes(this.position);
+// }
 
 
 const reportSchema = new mongoose.Schema({
@@ -54,6 +54,12 @@ const reportSchema = new mongoose.Schema({
     type: String,
     enum: ['Goalkeeper', 'Full Back', 'Centre Back', 'Centre Midfield', 'Attacking Midfield', 'Winger', 'Striker'],
     required: true
+  },
+  date: {
+    type: Date, required: true
+  },
+  height: {
+    type: String, required: true
   },
   startLocation: {
     lat: { type: Number },
@@ -79,7 +85,7 @@ const reportSchema = new mongoose.Schema({
   organisingSetPlays: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   startingPositions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   //MENTAL
-  bravery: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  bravery: {type: Number, min: 1, max: 5, required: true },
   communication: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   commandOfBox: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   errorProne: {type: Number, min: 1, max: 5, required: isGoalKeeper },
@@ -91,58 +97,75 @@ const reportSchema = new mongoose.Schema({
   reach: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   reactions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   //OVERALL
-  technicalRating: {type: String, min: 1, max: 5, required: isGoalKeeper },
-  tacticalRating: { type: Number, min: 1, max: 5, required: isGoalKeeper},
-  physicalRating: { type: Number, min: 1, max: 5, required: isGoalKeeper},
-  mentalRating: { type: Number, min: 1, max: 5, required: isGoalKeeper },
+  technicalRating: {type: String, min: 1, max: 5, required: true },
+  tacticalRating: { type: Number, min: 1, max: 5, required: true},
+  physicalRating: { type: Number, min: 1, max: 5, required: true},
+  mentalRating: { type: Number, min: 1, max: 5, required: true },
 
   // END OF GOALKEEPER
+
+  // START OF FULLBACK
+  // TECHNICAL
   receivingTechniques: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  rangeOfPassing: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer },
-  turning: {type: Number, min: 1, max: 5, required: isAttackingPlayer },
-  dribbling: {type: Number, min: 1, max: 5, required: isAttackingPlayer },
-  runningWithBall: {type: Number, min: 1, max: 5, required: isWide},
   crossing: {type: Number, min: 1, max: 5, required: isWide},
-  finishing: {type: Number, min: 1, max: 5, required: isAttackingPlayer},
+  dribbling: {type: Number, min: 1, max: 5, required: isAttackingPlayer },
+  heading: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
+  rangeOfPassing: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer },
+
+  //TACTICAL
   oneVsOneDefending: {type: Number, min: 1, max: 5, required: isWide},
   interceptions: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer },
-  tackling: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer},
-  blocking: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer },
-  heading: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  passingSupport: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  depthWidth: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  mobilityMovement: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  penetration: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  improvisation: {type: Number, min: 1, max: 5, isOutfieldPlayer},
-  recoveryDelay: {type: Number, min: 1, max: 5, isOutfieldPlayer},
-  pressureSupport: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  compactness: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  coverBalance: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  controlRestraint: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  headingAttackingSetPlays: {type: Number, min: 1, max: 5, required: isCentreBack},
-  clearances: {type: Number, min: 1 , max: 5, required: isCentreBack },
-  headingGeneralSetPlays: {type: Number, min: 1, max: 5, isCentreBack },
-  scoringTechniques: {type: Number, min: 1, max: 5, required: isFrontThree},
-  pressuring: {type: Number, min: 1, max: 5, required: isFrontThree},
-  forcingPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
-  recoveryRun: {type: Number, min: 1, max: 5, required: isFrontThree},
   tracking: {type: Number, min: 1, max: 5, required: isAttackingPlayer},
-  linkPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
+  covering: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
+  holdingTheLine: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer},
+  compactness: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
 
+  //PHYSICAL
   pace: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  strength: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  endurance: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  mobility: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  jumping: {type: Number, min: 1, max: 5, required: heading},
-  boxTobox: {type: Number, min: 1, max: 5, required: isCentreMidfield},
-  strengthTackle: {type: Number, min: 1, max: 5, required: isCentreMidfield},
-  secondBall: {type: Number, min: 1, max: 5, required: isCentreMidfield},
+  recovery: {type: Number, min: 1, max: 5, isOutfieldPlayer},
   first5: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  changeOfDirection: {type: Number, min: 1, max: 5, required: isFrontThree},
+  endurance: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
+  boxTobox: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
+  strength: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
 
-  workRate: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
+  //MENTAL
   determination: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   takeInfo: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
+  //errorReaction below
+  //bravery in GoalKeeper
+  tenacity: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
+
+  //OVERALL
+  //In goalkeeper section
+
+  // turning: {type: Number, min: 1, max: 5, required: isAttackingPlayer },
+  // runningWithBall: {type: Number, min: 1, max: 5, required: isWide},
+  // finishing: {type: Number, min: 1, max: 5, required: isAttackingPlayer},
+  // tackling: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer},
+  // blocking: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer },
+  // passingSupport: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
+  // depthWidth: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
+  // mobilityMovement: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
+  // penetration: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
+  // improvisation: {type: Number, min: 1, max: 5, isOutfieldPlayer},
+  // pressureSupport: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
+  // controlRestraint: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
+  // headingAttackingSetPlays: {type: Number, min: 1, max: 5, required: isCentreBack},
+  // clearances: {type: Number, min: 1 , max: 5, required: isCentreBack },
+  // headingGeneralSetPlays: {type: Number, min: 1, max: 5, isCentreBack },
+  // scoringTechniques: {type: Number, min: 1, max: 5, required: isFrontThree},
+  // pressuring: {type: Number, min: 1, max: 5, required: isFrontThree},
+  // forcingPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
+  // recoveryRun: {type: Number, min: 1, max: 5, required: isFrontThree},
+  // linkPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
+  //
+  // mobility: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
+  // jumping: {type: Number, min: 1, max: 5, required: heading},
+  // strengthTackle: {type: Number, min: 1, max: 5, required: isCentreMidfield},
+  // secondBall: {type: Number, min: 1, max: 5, required: isCentreMidfield},
+  // changeOfDirection: {type: Number, min: 1, max: 5, required: isFrontThree},
+  //
+  // workRate: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   errorReaction: {type: Number, min: 1, max: 5, required: true}
 
 //   overallRating: { type: Number, min: 1, max: 5, required: true },

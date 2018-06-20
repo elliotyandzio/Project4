@@ -1,25 +1,27 @@
 import React from 'react';
 import axios from 'axios';
-//import ReportsNew from '../Reports/New';
+import moment from 'moment';
 import Map from '../common/Maps';
 import Auth from '../lib/Auth';
 import { Link } from 'react-router-dom';
-import GoalkeeperTechnicalChart from '../Charts/GoalkeeperTechnical';
-import GoalkeeperTacticalChart from '../Charts/GoalkeeperTactical';
-import GoalkeeperMentalChart from '../Charts/GoalkeeperMental';
-import GoalkeeperPhysicalChart from '../Charts/GoalkeeperPhysical';
-import GoalkeeperOverallChart from '../Charts/GoalkeeperOverall';
-import GoalkeeperChart from '../Charts/GK';
+import GoalkeeperTechnicalChart from '../Charts/GK/Technical';
+import GoalkeeperTacticalChart from '../Charts/GK/Tactical';
+import GoalkeeperMentalChart from '../Charts/GK/Mental';
+import GoalkeeperPhysicalChart from '../Charts/GK/Physical';
+import GoalkeeperOverallChart from '../Charts/Gk/Overall';
+import FullBackTechnicalChart from '../Charts/FB/Technical';
+import FullBackTacticalChart from '../Charts/FB/Tactical';
+import FullBackMentalChart from '../Charts/FB/Mental';
+import FullBackPhysicalChart from '../Charts/FB/Physical';
 
 class TeamsIndex extends React.Component {
   state = {
-    player: {}, //temporary for the player name --> need to pass through with props
-    //reports: [], //returns the array of maps from the database
+    player: {}, //object for return player data
     isOpen: false, //isOpen for the tabs
     id: '',       //id for the tabs
     modalIsOpen: false, //isOpen for the modal
     teamId: '',  //stores the team id from the url
-    playerId: '', //stores the player id from the url
+    playerId: '' //stores the player id from the url
   }
 
 
@@ -45,9 +47,6 @@ class TeamsIndex extends React.Component {
   }
 
   componentDidMount() {
-    // axios.get(`/api/teams/${this.props.match.params.id}/players/${this.props.match.params.playerId}`)
-    //   .then(res => this.setState({player: res.data}));
-
     axios.get(`/api/teams/${this.props.match.params.id}/players/${this.props.match.params.playerId}`)
       .then(res => this.setState({player: res.data }));
 
@@ -57,52 +56,50 @@ class TeamsIndex extends React.Component {
     });
   }
 
-
     getDistance = (distanceVal) => {
       this.setState({ distance: distanceVal });
     }
+
+    metresToMiles = (num) => {
+      const miles = parseFloat(((num/1000)*0.621371)).toFixed(2);
+      return miles;
+    }
+
+    expensesFromMiles = (num) => {
+      const expenses = parseFloat((((num/1000)*0.621371)*0.45)).toFixed(2);
+      return expenses;
+    }
+
+
 
     render() {
       return(
         <div className="container">
           <h1 className="is-size-1 has-text-centered">{this.state.player.name}</h1>
           <div className="columns">
-            <div className="column is-half">
+            <div className="column is-half-desktop is-half-tablet is-half-mobile">
               <h2 className="is-size-2">Reports:</h2>
             </div>
 
-            <div className="column is-half">
+            {/* Start of Add report button */}
+            <div className="column is-half-desktop is-half-tablet is-half-mobile">
               <Link to={`/teams/${this.props.match.params.id}/players/${this.props.match.params.playerId}/reports`}>
                 <button className="button is-success is-pulled-right">Add Report</button>
               </Link>
-              {/* <button className="button is-success is-pulled-right" onClick={this.handleModalToggle}>
-                Add Report</button> */}
             </div>
-          </div>
-          <div className="tabs">
-            <ul>
-              {this.state.player.reports && this.state.player.reports.map(report =>
-                <li key={report._id}><a id={report._id} onClick={this.handleToggle}>Vs {report.opposition}</a></li>)}
-            </ul>
+            {/* End of Add report button */}
+
           </div>
 
-          <div className="has-text-centered">
-            <h4 className="is-size-4 has-text-weight-bold">Average Stats for {this.state.player.name}</h4>
-            {!this.state.id && this.state.player.reports &&
-                <div className="has-text-centered">
-                  {this.state.player.reports.map(report => <div key={report._id}>
-                    {report.position === 'Goalkeeper' &&
-                      <div >
-                        <GoalkeeperChart
-                          name={this.state.player.name}
-                          reports={this.state.player.reports}
-                        />
-                      </div>
-                    }
-                  </div>
-                  )}
-                </div>
-            }
+          <div className="columns">
+            <div className="column is-full-desktop is-full-tablet is-full-mobile">
+              <div className="tabs is-toggle">
+                <ul>
+                  {this.state.player.reports && this.state.player.reports.map(report =>
+                    <li key={report._id}><a id={report._id} onClick={this.handleToggle}>Vs {report.opposition}</a></li>)}
+                </ul>
+              </div>
+            </div>
           </div>
 
           {this.state.player.reports && this.state.player.reports.map(report => this.state.id === report._id && <div>
@@ -110,6 +107,9 @@ class TeamsIndex extends React.Component {
               <div className="column is-half-desktop">
                 <h4 key={report._id} className="is-size-3">Game Info</h4>
               </div>
+
+              {console.log(Auth.getPayLoad())}
+              {/* Checks to see if the report is created by the same user than the one logged in and either shows the delete button or not */}
               {Auth.getPayLoad().sub === report.createdBy &&
               <div className="column is-half-desktop">
                 <button className="button is-danger is-pulled-right"
@@ -117,16 +117,19 @@ class TeamsIndex extends React.Component {
                   Delete Report
                 </button>
               </div>}
+
             </div>
             <div className="columns">
               <div className="column is-half-desktop">
                 <p className="is-size-6"><span className="has-text-weight-bold">Opposition:</span> {report.opposition}</p>
                 <p className="is-size-6"><span className="has-text-weight-bold">Score:</span> {report.score}</p>
                 <p className="is-size-6"><span className="has-text-weight-bold">Position:</span> {report.position}</p>
+                <p className="is-size-6"><span className="has-text-weight-bold">Date:</span> {moment(report.date).format('dddd Do MMMM YYYY')}</p>
               </div>
               <div className="column is-half-desktop">
                 <p className="is-size-6"><span className="has-text-weight-bold">Age Group:</span> {report.ageGroup}</p>
                 <p className="is-size-6"><span className="has-text-weight-bold">Footed:</span> {report.footed}</p>
+                <p className="is-size-6"><span className="has-text-weight-bold">Height:</span> {report.height}</p>
                 <p className="is-size-6"><span className="has-text-weight-bold">Written By:</span> {console.log(report)}</p>
               </div>
             </div>
@@ -140,26 +143,31 @@ class TeamsIndex extends React.Component {
                 reports={this.state.player.reports}
               />
               <div className="columns">
-                <div className="column is-half-desktop">
+                <div className="column is-half-desktop is-half-tablet is-full-mobile">
                   <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
                   <GoalkeeperTechnicalChart
                     id={this.state.id}
                     reports={this.state.player.reports}
                   />
-                  <br />
+                </div>
+                <div className="column is-half-desktop is-half-tablet is-full-mobile">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Tactical</h4>
+                  <GoalkeeperTacticalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+              </div>
+
+              <div className="columns">
+                <div className="column is-half-desktop is-half-tablet is-full-mobile">
                   <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Mental</h4>
                   <GoalkeeperMentalChart
                     id={this.state.id}
                     reports={this.state.player.reports}
                   />
                 </div>
-                <div className="column is-half-desktop">
-                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Tactical</h4>
-                  <GoalkeeperTacticalChart
-                    id={this.state.id}
-                    reports={this.state.player.reports}
-                  />
-                  <br />
+                <div className="column is-half-desktop is-half-tablet is-full-mobile">
                   <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Physical</h4>
                   <GoalkeeperPhysicalChart
                     id={this.state.id}
@@ -175,42 +183,35 @@ class TeamsIndex extends React.Component {
               <h4 className="is-size-4">Full Back Report</h4>
               <div className="columns">
                 <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Receiving Techniques:</span> {report.receivingTechniques}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Turning:</span> {report.turning}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Running With The Ball:</span> {report.runningWithBall}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Finishing:</span> {report.finishing}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Interceptions:</span> {report.interceptions}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Blocking:</span> {report.blocking}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Passing Support:</span> {report.passingSupport}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Movement:</span> {report.mobilityMovement}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Improvisation:</span> {report.improvisation}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Pressure Support:</span> {report.pressureSupport}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Covering:</span> {report.coverBalance}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Pace:</span> {report.pace}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Endurance:</span> {report.endurance}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">First 5 Yards:</span> {report.first5}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Determination:</span> {report.determination}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Reaction To Error:</span> {report.errorReaction}/5</p>
-
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
+                  <FullBackTechnicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
                 </div>
                 <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Range Of Passing:</span> {report.rangeOfPassing}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Dribbling:</span> {report.dribbling}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Crossing:</span> {report.crossing}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">1 Vs 1:</span> {report.oneVsOneDefending}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Tackling:</span> {report.tackling}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Heading:</span> {report.heading}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Depth Width:</span> {report.depthWidth}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Penetration:</span> {report.penetration}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Recovery Delay:</span> {report.recoveryDelay}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Compactness:</span> {report.compactness}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Restraint:</span> {report.controlRestraint}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Strength:</span> {report.strength}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Mobility:</span> {report.mobility}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Work Rate:</span> {report.workRate}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Taking on Information:</span> {report.takeInfo}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Tracking:</span> {report.tracking}/5</p>
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Tactical</h4>
+                  <FullBackTacticalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+              </div>
 
+              <div className="columns">
+                <div className="column is-half-desktop">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Mental</h4>
+                  <FullBackMentalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+                <div className="column is-half-desktop">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Physical</h4>
+                  <FullBackPhysicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
                 </div>
               </div>
               <hr />
@@ -353,10 +354,10 @@ class TeamsIndex extends React.Component {
               <h4 className="is-size-3">Expenses</h4>
               <div className="columns">
                 <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Distance:</span> {(parseFloat(this.state.distance)/1000).toFixed(2)}km</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Distance:</span> {this.metresToMiles(this.state.distance)}</p>
                 </div>
                 <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Total expenses:</span> £{((parseFloat(this.state.distance)/1000)*0.45).toFixed(2)}</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Total expenses:</span> £{(this.expensesFromMiles(this.state.distance))}</p>
                 </div>
               </div>
               <Map
@@ -366,26 +367,6 @@ class TeamsIndex extends React.Component {
               />
             </div>}
           </div>)}
-
-
-          {/* Start of the new team modal */}
-          {/* <div className={`modal ${this.state.modalIsOpen ? 'is-active' : ''}`}>
-            <div className="modal-background"></div>
-            <div className="modal-card">
-              <header className="modal-card-head">
-                <p className="modal-card-title">Add a Report</p>
-                <button onClick={() => this.setState({ isOpen: false })} className="delete" aria-label="close"></button>
-              </header>
-              <section className="modal-card-body">
-                <ReportsNew
-                  teamId={this.state.teamId}
-                  playerId={this.state.playerId}
-                />
-              </section>
-            </div>
-          </div> */}
-          {/* End of the new team modal */}
-
 
         </div>
 
