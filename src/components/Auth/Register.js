@@ -23,46 +23,54 @@ class AuthRegister extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <h1 className="is-size-1 has-text-centered">Register</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div className="field">
-            <input
-              className="input"
-              name="username"
-              placeholder="Username"
-              onChange={this.handleChange}
-            />
+      <section className="hero is-success is-fullheight">
+        <div className="hero-body">
+          <div className="container has-text-centered">
+            <h1 className="title is-size-1">Register</h1>
+            <div className="columns is-mobile">
+              <div className="column is-half is-offset-one-quarter">
+                <form onSubmit={this.handleSubmit}>
+                  <div className="field">
+                    <input
+                      className="input is-success is-medium"
+                      name="username"
+                      placeholder="Username"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="field">
+                    <input
+                      className="input is-success is-medium"
+                      name="email"
+                      placeholder="Email"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="field">
+                    <input
+                      type="password"
+                      className="input is-success is-medium"
+                      name="password"
+                      placeholder="Password"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="field">
+                    <input
+                      type="password"
+                      className="input is-success is-medium"
+                      name="passwordConfirmation"
+                      placeholder="Password confirmation"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <button className="button is-warning is-fullwidth is-medium">Submit</button>
+                </form>
+              </div>
+            </div>
           </div>
-          <div className="field">
-            <input
-              className="input"
-              name="email"
-              placeholder="Email"
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="field">
-            <input
-              type="password"
-              className="input"
-              name="password"
-              placeholder="Password"
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="field">
-            <input
-              type="password"
-              className="input"
-              name="passwordConfirmation"
-              placeholder="Password confirmation"
-              onChange={this.handleChange}
-            />
-          </div>
-          <button className="button is-primary">Submit</button>
-        </form>
-      </div>
+        </div>
+      </section>
     );
   }
 }
