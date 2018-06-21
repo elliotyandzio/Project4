@@ -42,13 +42,12 @@ class TeamsIndex extends React.Component {
     return (
       <div className="container">
         <h1 className="is-size-1 has-text-centered">Teams Index</h1>
-        <button className="button is-success" onClick={this.handleToggle}>Add Team</button>
         <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth is-responsive">
           <thead>
             <tr>
               <th>Team Name</th>
               <th>League</th>
-              <th></th>
+              <th className="has-text-centered"><button className="button is-success" onClick={this.handleToggle}>Add Team</button></th>
             </tr>
           </thead>
           <tbody>
@@ -58,7 +57,7 @@ class TeamsIndex extends React.Component {
                 <td>{teams.league}</td>
                 <td className="has-text-centered">
                   <Link to={`/teams/${teams._id}/players`}>
-                    <button className="button is-primary">View</button>
+                    <button className="button is-success">View</button>
                   </Link>
                 </td>
               </tr>

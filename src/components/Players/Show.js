@@ -234,7 +234,7 @@ class TeamsIndex extends React.Component {
                   />
                 </div>
                 <div className="column is-half-desktop">
-                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Tactical</h4>
                   <CentreBackTacticalChart
                     id={this.state.id}
                     reports={this.state.player.reports}
@@ -243,14 +243,14 @@ class TeamsIndex extends React.Component {
               </div>
               <div className="columns">
                 <div className="column is-half-desktop">
-                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Mental</h4>
                   <CentreBackMentalChart
                     id={this.state.id}
                     reports={this.state.player.reports}
                   />
                 </div>
                 <div className="column is-half-desktop">
-                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Physical</h4>
                   <CentreBackPhysicalChart
                     id={this.state.id}
                     reports={this.state.player.reports}

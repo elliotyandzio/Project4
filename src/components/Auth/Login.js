@@ -17,7 +17,7 @@ class AuthLogin extends React.Component {
     axios.post('/api/login', this.state)
       .then(res => {
         Auth.setToken(res.data.token);
-        Flash.setMessage('success', res.data.message);
+        Flash.setMessage('warning', res.data.message);
       })
       .then(() => this.props.history.push('/teams'))
       .catch(() => {

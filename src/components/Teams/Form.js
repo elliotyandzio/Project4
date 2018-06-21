@@ -11,7 +11,7 @@ const TeamsForm = ({ handleChange, handleSubmit, team }) => {
         <label htmlFor="league">League</label>
         <input id="league" name="league" className="input" placeholder="League" onChange={handleChange} value={team.league || ''} />
       </div>
-      <button className="button is-primary">Submit</button>
+      <button className="button is-success">Submit</button>
     </form>
   );
 };

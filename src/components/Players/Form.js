@@ -7,7 +7,7 @@ const PlayerForm = ({ handleChange, handleSubmit, player }) => {
         <label htmlFor="name">Name</label>
         <input id="name" name="name" className="input" placeholder="Name" onChange={handleChange} value={player.name || ''} />
       </div>
-      <button className="button is-primary">Submit</button>
+      <button className="button is-success">Submit</button>
     </form>
   );
 };
