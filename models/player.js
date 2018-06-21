@@ -3,21 +3,37 @@ const mongoose = require('mongoose');
 function isGoalKeeper() {
   return this.position === 'Goalkeeper';
 }
+
+function isGKorCBorFB(){
+  return ['Goalkeeper', 'Full Back', 'Centre Back'].includes(this.position);
+}
+
+function isGKOrCB() {
+  return ['Goalkeeper', 'Centre Back'].includes(this.position);
+}
 function isOutfieldPlayer() {
   return this.position !== 'Goalkeeper';
 }
+
+function isDefender() {
+  return ['Full Back', 'Centre Back'].includes(this.position);
+}
 //
-// function isCentreBack() {
-//   return this.position === 'Centre Back';
-// }
+function isCentreBack() {
+  return this.position === 'Centre Back';
+}
+
+function isFullBack() {
+  this.position === 'Full Back';
+}
 // //
 // function isCentreMidfield() {
 //   return this.position === 'Centre Midfield';
 // }
 // //
-function isNotAttackingPlayer() {
-  return ['Full Back', 'Center Back', 'Centre Midfield'].includes(this.position);
-}
+// function isNotAttackingPlayer() {
+//   return ['Full Back', 'Centre Back', 'Centre Midfield'].includes(this.position);
+// }
 //
 function isWide() {
   return ['Full Back', 'Winger'].includes(this.position);
@@ -76,7 +92,7 @@ const reportSchema = new mongoose.Schema({
   dealingWithCrosses: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   shotStopping: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   generalHandling: {type: Number, min: 1, max: 5, required: isGoalKeeper },
-  playingOutFromBack: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  playingOutFromBack: {type: Number, min: 1, max: 5, required: isGKOrCB },
   //TACTICAL
   counterAttacking: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   supportDefenders: {type: Number, min: 1, max: 5, required: isGoalKeeper },
@@ -85,7 +101,7 @@ const reportSchema = new mongoose.Schema({
   organisingSetPlays: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   startingPositions: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   //MENTAL
-  bravery: {type: Number, min: 1, max: 5, required: true },
+  bravery: {type: Number, min: 1, max: 5, required: isGKorCBorFB },
   communication: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   commandOfBox: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   errorProne: {type: Number, min: 1, max: 5, required: isGoalKeeper },
@@ -109,23 +125,23 @@ const reportSchema = new mongoose.Schema({
   receivingTechniques: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
   crossing: {type: Number, min: 1, max: 5, required: isWide},
   dribbling: {type: Number, min: 1, max: 5, required: isAttackingPlayer },
-  heading: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  rangeOfPassing: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer },
+  heading: {type: Number, min: 1, max: 5, required: isDefender},
+  rangeOfPassing: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
 
   //TACTICAL
   oneVsOneDefending: {type: Number, min: 1, max: 5, required: isWide},
-  interceptions: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer },
+  interceptions: {type: Number, min: 1, max: 5, required: isDefender },
   tracking: {type: Number, min: 1, max: 5, required: isAttackingPlayer},
-  covering: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  holdingTheLine: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer},
+  covering: {type: Number, min: 1, max: 5, required: isFullBack },
+  holdingTheLine: {type: Number, min: 1, max: 5, required: isDefender},
   compactness: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
 
   //PHYSICAL
   pace: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   recovery: {type: Number, min: 1, max: 5, isOutfieldPlayer},
   first5: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  endurance: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  boxTobox: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
+  endurance: {type: Number, min: 1, max: 5, required: isFullBack},
+  boxTobox: {type: Number, min: 1, max: 5, required: isFullBack},
   strength: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
 
   //MENTAL
@@ -138,10 +154,43 @@ const reportSchema = new mongoose.Schema({
   //OVERALL
   //In goalkeeper section
 
+  //CENTRE BACK FIELDS
+  //Technical
+  //Heading in fullback
+  //Receiving Techniques in fullback
+  //Range of passing in FullBack
+  tackling: {type: Number, min: 1, max: 5, required: isCentreBack},
+  //playingOutFromBack in Goalkeeper
+
+  //TACTICAL
+  headingSetPlays: {type: Number, min: 1, max: 5, isCentreBack },
+  //interceptions is in fullback
+  //holdingTheLine is in FullBack
+  //compactness is in FullBack
+  decisionMaking: {type: Number, min: 1, max: 5, isCentreBack},
+
+  //Mental
+  //errorReaction below
+  //takeInfo in fullback
+  //determination in fullback
+  //tenacity in FullBack
+  aggression: {type: Number, min: 1, max: 5, isCentreBack},
+  //bravery in GK
+
+  //PHYSICAL
+  jumping: {type: Number, min: 1, max: 5, required: isCentreBack},
+  //pace is in FullBack
+  //first5 is in FullBack
+  //strength is in FullBack
+  mobility: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
+
+  //
+
+
   // turning: {type: Number, min: 1, max: 5, required: isAttackingPlayer },
   // runningWithBall: {type: Number, min: 1, max: 5, required: isWide},
   // finishing: {type: Number, min: 1, max: 5, required: isAttackingPlayer},
-  // tackling: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer},
+
   // blocking: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer },
   // passingSupport: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
   // depthWidth: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
@@ -152,15 +201,12 @@ const reportSchema = new mongoose.Schema({
   // controlRestraint: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
   // headingAttackingSetPlays: {type: Number, min: 1, max: 5, required: isCentreBack},
   // clearances: {type: Number, min: 1 , max: 5, required: isCentreBack },
-  // headingGeneralSetPlays: {type: Number, min: 1, max: 5, isCentreBack },
   // scoringTechniques: {type: Number, min: 1, max: 5, required: isFrontThree},
   // pressuring: {type: Number, min: 1, max: 5, required: isFrontThree},
   // forcingPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
   // recoveryRun: {type: Number, min: 1, max: 5, required: isFrontThree},
   // linkPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
   //
-  // mobility: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  // jumping: {type: Number, min: 1, max: 5, required: heading},
   // strengthTackle: {type: Number, min: 1, max: 5, required: isCentreMidfield},
   // secondBall: {type: Number, min: 1, max: 5, required: isCentreMidfield},
   // changeOfDirection: {type: Number, min: 1, max: 5, required: isFrontThree},

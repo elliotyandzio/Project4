@@ -13,6 +13,10 @@ import FullBackTechnicalChart from '../Charts/FB/Technical';
 import FullBackTacticalChart from '../Charts/FB/Tactical';
 import FullBackMentalChart from '../Charts/FB/Mental';
 import FullBackPhysicalChart from '../Charts/FB/Physical';
+import CentreBackTechnicalChart from '../Charts/CB/Technical';
+import CentreBackTacticalChart from '../Charts/CB/Tactical';
+import CentreBackMentalChart from '../Charts/CB/Mental';
+import CentreBackPhysicalChart from '../Charts/CB/Physical';
 
 class TeamsIndex extends React.Component {
   state = {
@@ -76,7 +80,7 @@ class TeamsIndex extends React.Component {
       return(
         <div className="container">
           <h1 className="is-size-1 has-text-centered">{this.state.player.name}</h1>
-          <div className="columns">
+          <div className="columns is-mobile">
             <div className="column is-half-desktop is-half-tablet is-half-mobile">
               <h2 className="is-size-2">Reports:</h2>
             </div>
@@ -103,15 +107,15 @@ class TeamsIndex extends React.Component {
           </div>
 
           {this.state.player.reports && this.state.player.reports.map(report => this.state.id === report._id && <div>
-            <div className="columns">
-              <div className="column is-half-desktop">
+            <div className="columns is-mobile">
+              <div className="column is-half-desktop is-half-tablet is-half-mobile">
                 <h4 key={report._id} className="is-size-3">Game Info</h4>
               </div>
 
               {console.log(Auth.getPayLoad())}
               {/* Checks to see if the report is created by the same user than the one logged in and either shows the delete button or not */}
               {Auth.getPayLoad().sub === report.createdBy &&
-              <div className="column is-half-desktop">
+              <div className="column is-half-desktop is-half-tablet is-half-mobile">
                 <button className="button is-danger is-pulled-right"
                   onClick={() => this.handleReportDelete(report)}>
                   Delete Report
@@ -119,6 +123,7 @@ class TeamsIndex extends React.Component {
               </div>}
 
             </div>
+
             <div className="columns">
               <div className="column is-half-desktop">
                 <p className="is-size-6"><span className="has-text-weight-bold">Opposition:</span> {report.opposition}</p>
@@ -222,37 +227,34 @@ class TeamsIndex extends React.Component {
               <h4 className="is-size-4">Centre Back Report</h4>
               <div className="columns">
                 <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Receiving Techniques:</span> {report.receivingTechniques}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Passing Support:</span> {report.passingSupport}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Movement:</span> {report.mobilityMovement}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Improvisation:</span> {report.improvisation}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Pressure Support:</span> {report.pressureSupport}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Cover Balance:</span> {report.coverBalance}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Pace:</span> {report.pace}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Endurance:</span> {report.endurance}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">First 5 Yards:</span> {report.first5}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Determination:</span> {report.determination}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Error Reaction:</span> {report.errorReaction}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Clearances:</span> {report.clearances}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Jumping:</span> {report.jumping}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Interceptions:</span> {report.interceptions}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Blocking:</span> {report.blocking}/5</p>
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
+                  <CentreBackTechnicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
                 </div>
                 <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Heading:</span> {report.heading}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Depth Width:</span> {report.depthWidth}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Penetration:</span> {report.penetration}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Recovery Delay:</span> {report.recoveryDelay}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Compactness:</span> {report.compactness}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Compactness:</span> {report.controlRestraint}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Strength:</span> {report.strength}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Mobility:</span> {report.mobility}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Work Rate:</span> {report.workRate}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Taking on Info:</span> {report.takeInfo}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Heading Attacking Set Plays:</span> {report.headingAttackingSetPlays}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Heading General Set Plays:</span> {report.headingGeneralSetPlays}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Range of Passing:</span> {report.rangeOfPassing}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Tackling:</span> {report.tackling}/5</p>
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
+                  <CentreBackTacticalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+              </div>
+              <div className="columns">
+                <div className="column is-half-desktop">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
+                  <CentreBackMentalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+                <div className="column is-half-desktop">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
+                  <CentreBackPhysicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
                 </div>
               </div>
               <hr />
@@ -354,7 +356,7 @@ class TeamsIndex extends React.Component {
               <h4 className="is-size-3">Expenses</h4>
               <div className="columns">
                 <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Distance:</span> {this.metresToMiles(this.state.distance)}</p>
+                  <p className="is-size-6"><span className="has-text-weight-bold">Distance:</span> {this.metresToMiles(this.state.distance)} miles</p>
                 </div>
                 <div className="column is-half-desktop">
                   <p className="is-size-6"><span className="has-text-weight-bold">Total expenses:</span> £{(this.expensesFromMiles(this.state.distance))}</p>
@@ -367,6 +369,7 @@ class TeamsIndex extends React.Component {
               />
             </div>}
           </div>)}
+          <hr />
 
         </div>
 

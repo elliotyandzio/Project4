@@ -16,6 +16,12 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
         const overall = Math.round(values/5);
         return overall;
       }
+    } if (report.position === 'Centre Back') {
+      if(typeof report.heading !== 'undefined' && typeof report.receivingTechniques !== 'undefined' && typeof report.rangeOfPassing !== 'undefined' && typeof report.tackling !== 'undefined' && typeof report.playingOutFromBack !== 'undefined') {
+        const values = (parseInt(report.heading) + parseInt(report.receivingTechniques) + parseInt(report.rangeOfPassing) + parseInt(report.tackling) + parseInt(report.playingOutFromBack));
+        const overall = Math.round(values/5);
+        return overall;
+      }
     }
   };
 
@@ -30,6 +36,12 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
       if(typeof report.oneVsOneDefending !== 'undefined' && typeof report.interceptions !== 'undefined' && typeof report.tracking !== 'undefined' && typeof report.covering !== 'undefined' && typeof report.holdingTheLine !== 'undefined' && typeof report.compactness !== 'undefined') {
         const values = (parseInt(report.oneVsOneDefending) + parseInt(report.interceptions) + parseInt(report.tracking) + parseInt(report.covering) + parseInt(report.holdingTheLine) + parseInt(report.compactness));
         const overall = Math.round(values/6);
+        return overall;
+      }
+    } if (report.position === 'Centre Back') {
+      if(typeof report.headingSetPlays !== 'undefined' && typeof report.interceptions !== 'undefined' && typeof report.holdingTheLine !== 'undefined' && typeof report.compactness !== 'undefined' && typeof report.decisionMaking) {
+        const values = (parseInt(report.headingSetPlays) + parseInt(report.interceptions) + parseInt(report.holdingTheLine) + parseInt(report.compactness) + parseInt(report.decisionMaking));
+        const overall = Math.round(values/5);
         return overall;
       }
     }
@@ -48,6 +60,12 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
         const overall = Math.round(values/5);
         return overall;
       }
+    } if (report.position === 'Centre Back') {
+      if(typeof report.errorReaction !== 'undefined' && typeof report.takeInfo !== 'undefined' && typeof report.determination !== 'undefined' && typeof report.tenacity !== 'undefined' && typeof report.aggression !== 'undefined' && typeof report.bravery !== 'undefined') {
+        const values = (parseInt(report.errorReaction) + parseInt(report.takeInfo) + parseInt(report.determination) + parseInt(report.tenacity) + parseInt(report.aggression) + parseInt(report.bravery));
+        const overall = Math.round(values/6);
+        return overall;
+      }
     }
   };
 
@@ -62,6 +80,12 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
       if(typeof report.pace !== 'undefined' && typeof report.recovery !== 'undefined' && typeof report.first5 !== 'undefined' && typeof report.endurance !== 'undefined' && typeof report.boxTobox !== 'undefined' && typeof report.strength !== 'undefined') {
         const values = (parseInt(report.pace) + parseInt(report.recovery) + parseInt(report.first5) + parseInt(report.endurance) + parseInt(report.boxTobox) + parseInt(report.strength));
         const overall = Math.round(values/6);
+        return overall;
+      }
+    } if (report.position === 'Centre Back') {
+      if(typeof report.jumping !== 'undefined' && typeof report.pace !== 'undefined' && typeof report.first5 !== 'undefined' && typeof report.strength !== 'undefined' && typeof report.mobility !== 'undefined') {
+        const values = (parseInt(report.jumping) + parseInt(report.pace) + parseInt(report.first5) + parseInt(report.strength) + parseInt(report.mobility));
+        const overall = Math.round(values/5);
         return overall;
       }
     }
@@ -174,7 +198,7 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
         </div>
         <div className="field pos">
           <div className="control" onChange={handlePositionSelect} value={report.position || ''}>
-            <div className="columns">
+            <div className="columns is-mobile">
               <div className="column has-text-centered">
                 <label className="radio">
                   <input type="radio" name="position" value="Goalkeeper" />
@@ -182,7 +206,7 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
                 </label>
               </div>
             </div>
-            <div className="columns">
+            <div className="columns is-mobile">
               <div className="column is-2 is-offset-1">
                 <label className="radio">
                   <input type="radio" name="position" value="Full Back"  />
@@ -208,7 +232,7 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
                 </label>
               </div>
             </div>
-            <div className="columns">
+            <div className="columns is-mobile">
               <div className="column is-2 is-offset-4">
                 <label className="radio">
                   <input type="radio" name="position" value="Centre Midfield"/>
@@ -222,7 +246,7 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
                 </label>
               </div>
             </div>
-            <div className="columns">
+            <div className="columns is-mobile">
               <div className="column has-text-centered">
                 <label className="radio">
                   <input type="radio" name="position" value="Attacking Midfield"/>
@@ -230,7 +254,7 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
                 </label>
               </div>
             </div>
-            <div className="columns">
+            <div className="columns is-mobile">
               <div className="column is-2 is-offset-1">
                 <label className="radio">
                   <input type="radio" name="position" value="Winger" />
@@ -244,7 +268,7 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
                 </label>
               </div>
             </div>
-            <div className="columns">
+            <div className="columns is-mobile">
               <div className="column has-text-centered">
                 <label className="radio">
                   <input type="radio" name="position" value="Striker"/>
@@ -765,27 +789,8 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
         <div>
           <hr />
           <h2 className="is-size-2">{report.position}</h2>
-          <div className="columns">
-            <div className="column is-2">
-              <label htmlFor="receivingTechniques">Receiving Techniques</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="receivingTechniques" onChange={handleChange} value={parseInt(report.receivingTechniques) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.receivingTechniques}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="rangeOfPassing">Range of Passing</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="rangeOfPassing" onChange={handleChange} value={parseInt(report.rangeOfPassing) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.rangeOfPassing}
-            </div>
-          </div>
-
+          <h4 className="is-size-4">Technical - <span>{technicalOverall()}</span></h4>
+          <input type="number" className="is-invisible" name="technicalRating" onChange={handleChange} value={parseInt(report.technicalRating = technicalOverall()) || ''}/>
           <div className="columns">
             <div className="column is-2">
               <label htmlFor="heading">Heading</label>
@@ -797,256 +802,25 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
               {report.heading}
             </div>
             <div className="column is-2">
-              <label htmlFor="passingSupport">Passing Support</label>
+              <label htmlFor="receivingTechniques">Receiving Techniques</label>
             </div>
             <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="passingSupport" onChange={handleChange} value={parseInt(report.passingSupport) || ''}/>
+              <input type="range" min="1" max="5" className="slider" name="receivingTechniques" onChange={handleChange} value={parseInt(report.receivingTechniques) || ''}/>
             </div>
             <div className="column is-1">
-              {report.passingSupport}
+              {report.receivingTechniques}
             </div>
           </div>
 
           <div className="columns">
             <div className="column is-2">
-              <label htmlFor="depthWidth">Depth Width</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="depthWidth" onChange={handleChange} value={parseInt(report.depthWidth) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.depthWidth}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="mobilityMovement">Movement</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="mobilityMovement" onChange={handleChange} value={parseInt(report.mobilityMovement) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.mobilityMovement}
-            </div>
-          </div>
-
-          <div className="columns">
-            <div className="column is-2">
-              <label htmlFor="penetration">Penetration</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="penetration" onChange={handleChange} value={parseInt(report.penetration) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.penetration}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="improvisation">Improvistion</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="improvisation" onChange={handleChange} value={parseInt(report.improvisation) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.improvisation}
-            </div>
-          </div>
-
-          <div className="columns">
-            <div className="column is-2">
-              <label htmlFor="recoveryDelay">Recovery Delay</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="recoveryDelay" onChange={handleChange} value={parseInt(report.recoveryDelay) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.recoveryDelay}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="pressureSupport">Pressure Support</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="pressureSupport" onChange={handleChange} value={parseInt(report.pressureSupport) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.pressureSupport}
-            </div>
-          </div>
-
-          <div className="columns">
-            <div className="column is-2">
-              <label htmlFor="compactness">Compactness</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="compactness" onChange={handleChange} value={parseInt(report.compactness) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.compactness}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="coverBalance">Cover Balance</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="coverBalance" onChange={handleChange} value={parseInt(report.coverBalance) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.coverBalance}
-            </div>
-          </div>
-
-          <div className="columns">
-            <div className="column is-2">
-              <label htmlFor="controlRestraint">Control</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="controlRestraint" onChange={handleChange} value={parseInt(report.controlRestraint) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.controlRestraint}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="pace">Pace</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="pace" onChange={handleChange} value={parseInt(report.pace) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.pace}
-            </div>
-          </div>
-
-          <div className="columns">
-            <div className="column is-2">
-              <label htmlFor="strength">Strength</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="strength" onChange={handleChange} value={parseInt(report.strength) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.strength}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="endurance">Endurance</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="endurance" onChange={handleChange} value={parseInt(report.endurance) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.endurance}
-            </div>
-          </div>
-
-          <div className="columns">
-            <div className="column is-2">
-              <label htmlFor="mobility">Mobility</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="mobility" onChange={handleChange} value={parseInt(report.mobility) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.mobility}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="first5">First 5 Yards</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="first5" onChange={handleChange} value={parseInt(report.first5) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.first5}
-            </div>
-          </div>
-
-          <div className="columns">
-            <div className="column is-2">
-              <label htmlFor="workRate">Work Rate</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="workRate" onChange={handleChange} value={parseInt(report.workRate) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.workRate}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="determination">Determination</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="determination" onChange={handleChange} value={parseInt(report.determination) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.determination}
-            </div>
-          </div>
-
-          <div className="columns">
-            <div className="column is-2">
-              <label htmlFor="takeInfo">Take On Info</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="takeInfo" onChange={handleChange} value={parseInt(report.takeInfo) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.takeInfo}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="errorReaction">Error Reaction</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="errorReaction" onChange={handleChange} value={parseInt(report.errorReaction) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.errorReaction}
-            </div>
-          </div>
-
-          <div className="columns">
-            <div className="column is-2">
-              <label htmlFor="headingAttackingSetPlays">Heading Atk Set Pieces</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="headingAttackingSetPlays" onChange={handleChange} value={parseInt(report.headingAttackingSetPlays) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.headingAttackingSetPlays}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="clearances">Clearances</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="clearances" onChange={handleChange} value={parseInt(report.clearances) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.clearances}
-            </div>
-          </div>
-
-          <div className="columns">
-            <div className="column is-2">
-              <label htmlFor="jumping">Jumping</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="jumping" onChange={handleChange} value={parseInt(report.jumping) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.jumping}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="rangeOfPassing">Range Of Passing</label>
+              <label htmlFor="rangeOfPassing">Range of Passing</label>
             </div>
             <div className="column is-3">
               <input type="range" min="1" max="5" className="slider" name="rangeOfPassing" onChange={handleChange} value={parseInt(report.rangeOfPassing) || ''}/>
             </div>
             <div className="column is-1">
               {report.rangeOfPassing}
-            </div>
-          </div>
-
-          <div className="columns">
-            <div className="column is-2">
-              <label htmlFor="interceptions">Interceptions</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="interceptions" onChange={handleChange} value={parseInt(report.interceptions) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.interceptions}
             </div>
             <div className="column is-2">
               <label htmlFor="tackling">Tackling</label>
@@ -1061,24 +835,196 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
 
           <div className="columns">
             <div className="column is-2">
-              <label htmlFor="blocking">Blocking</label>
+              <label htmlFor="playingOutFromBack">Playing Out From Back</label>
             </div>
             <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="blocking" onChange={handleChange} value={parseInt(report.blocking) || ''}/>
+              <input type="range" min="1" max="5" className="slider" name="playingOutFromBack" onChange={handleChange} value={parseInt(report.playingOutFromBack) || ''}/>
             </div>
             <div className="column is-1">
-              {report.blocking}
-            </div>
-            <div className="column is-2">
-              <label htmlFor="headingGeneralSetPlays">Heading Set Pieces</label>
-            </div>
-            <div className="column is-3">
-              <input type="range" min="1" max="5" className="slider" name="headingGeneralSetPlays" onChange={handleChange} value={parseInt(report.headingGeneralSetPlays) || ''}/>
-            </div>
-            <div className="column is-1">
-              {report.headingGeneralSetPlays}
+              {report.playingOutFromBack}
             </div>
           </div>
+
+          <hr />
+          <h4 className="is-size-4">Tactical - <span>{tacticalOverall()}</span></h4>
+          <input type="number" className="is-invisible" name="tacticalRating" onChange={handleChange} value={parseInt(report.tacticalRating = tacticalOverall()) || ''}/>
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="headingSetPlays">Heading Set Plays</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="headingSetPlays" onChange={handleChange} value={parseInt(report.headingSetPlays) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.headingSetPlays}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="interceptions">Interceptions</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="interceptions" onChange={handleChange} value={parseInt(report.interceptions) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.interceptions}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="holdingTheLine">Holding The Line</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="holdingTheLine" onChange={handleChange} value={parseInt(report.holdingTheLine) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.holdingTheLine}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="compactness">Compactness</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="compactness" onChange={handleChange} value={parseInt(report.compactness) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.compactness}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="decisionMaking">Decision Making</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="decisionMaking" onChange={handleChange} value={parseInt(report.decisionMaking) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.decisionMaking}
+            </div>
+          </div>
+
+          <hr />
+          <h4 className="is-size-4">Mental - <span>{mentalOverall()}</span></h4>
+          <input type="number" className="is-invisible" name="mentalRating" onChange={handleChange} value={parseInt(report.mentalRating = mentalOverall()) || ''}/>
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="errorReaction">Error Reaction</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="errorReaction" onChange={handleChange} value={parseInt(report.errorReaction) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.errorReaction}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="takeInfo">Taking on Info</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="takeInfo" onChange={handleChange} value={parseInt(report.takeInfo) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.takeInfo}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="determination">Determination</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="determination" onChange={handleChange} value={parseInt(report.determination) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.determination}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="tenacity">Tenacity</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="tenacity" onChange={handleChange} value={parseInt(report.tenacity) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.tenacity}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="aggression">Aggression</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="aggression" onChange={handleChange} value={parseInt(report.aggression) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.aggression}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="bravery">Bravery</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="bravery" onChange={handleChange} value={parseInt(report.bravery) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.bravery}
+            </div>
+          </div>
+
+          <hr />
+          <h4 className="is-size-4">Physical - <span>{physicalOverall()}</span></h4>
+          <input type="number" className="is-invisible" name="physicalRating" onChange={handleChange} value={parseInt(report.physicalRating = physicalOverall()) || ''}/>
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="pace">Pace</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="pace" onChange={handleChange} value={parseInt(report.pace) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.pace}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="jumping">Jumping</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="jumping" onChange={handleChange} value={parseInt(report.jumping) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.jumping}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="first5">First 5 Yards</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="first5" onChange={handleChange} value={parseInt(report.first5) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.first5}
+            </div>
+            <div className="column is-2">
+              <label htmlFor="strength">Strength</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="strength" onChange={handleChange} value={parseInt(report.strength) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.strength}
+            </div>
+          </div>
+
+          <div className="columns">
+            <div className="column is-2">
+              <label htmlFor="mobility">Mobility</label>
+            </div>
+            <div className="column is-3">
+              <input type="range" min="1" max="5" className="slider" name="mobility" onChange={handleChange} value={parseInt(report.mobility) || ''}/>
+            </div>
+            <div className="column is-1">
+              {report.mobility}
+            </div>
+          </div>
+
         </div>}
 
         {report.position === 'Centre Midfield' &&
