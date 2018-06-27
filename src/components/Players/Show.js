@@ -17,6 +17,14 @@ import CentreBackTechnicalChart from '../Charts/CB/Technical';
 import CentreBackTacticalChart from '../Charts/CB/Tactical';
 import CentreBackMentalChart from '../Charts/CB/Mental';
 import CentreBackPhysicalChart from '../Charts/CB/Physical';
+import CentreMidTechnicalChart from '../Charts/CM/Technical';
+import CentreMidTacticalChart from '../Charts/CM/Tactical';
+import CentreMidMentalChart from '../Charts/CM/Mental';
+import CentreMidPhysicalChart from '../Charts/CM/Physical';
+import AttackingMidTechnicalChart from '../Charts/AM/Technical';
+import AttackingMidTacticalChart from '../Charts/AM/Tactical';
+import AttackingMidMentalChart from '../Charts/AM/Mental';
+import AttackingMidPhysicalChart from '../Charts/AM/Physical';
 
 class TeamsIndex extends React.Component {
   state = {
@@ -262,47 +270,38 @@ class TeamsIndex extends React.Component {
 
             {report.position === 'Centre Midfield' &&
             <div className="CentreMidfield-Results">
-              <h4 className="is-size-4">Centre Midfield Report</h4>
+              <h4 className="is-size-3">Goalkeeper Report</h4>
               <div className="columns">
-                <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Box To Box:</span> {report.boxTobox}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Send Ball:</span> {report.secondBall}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Interceptions:</span> {report.interceptions}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Blocks:</span> {report.blocking}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Dribbling:</span> {report.dribbling}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Tracking:</span> {report.tracking}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Heading:</span> {report.heading}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Depth Width:</span> {report.depthWidth}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Penetration:</span> {report.penetration}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Recovery Delay:</span> {report.recoveryDelay}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Compactness:</span> {report.compactness}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Control Restraint:</span> {report.controlRestraint}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Clearances:</span> {report.clearances}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Pace:</span> {report.pace}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Endurance:</span> {report.endurance}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Jumping:</span> {report.jumping}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Work Rate:</span> {report.workRate}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Take on Info:</span> {report.takeInfo}/5</p>
+                <div className="column is-half-desktop is-half-tablet is-full-mobile">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
+                  <CentreMidTechnicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
                 </div>
-                <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Strength In Tackle:</span> {report.strengthTackle}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Range of Passing:</span> {report.rangeOfPassing}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Tackling:</span> {report.tackling}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Turning:</span> {report.turning}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Finishing:</span> {report.finishing}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Receiving Techniques:</span> {report.receivingTechniques}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Passing Support:</span> {report.passingSupport}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Mobility Movement:</span> {report.mobilityMovement}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Improvisation:</span> {report.improvisation}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Pressure Support:</span> {report.pressureSupport}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Cover Balance:</span> {report.coverBalance}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Heading Atk Set Plays:</span> {report.headingAttackingSetPlays}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Heading General Set Plays:</span> {report.headingGeneralSetPlays}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Strength:</span> {report.strength}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Mobility:</span> {report.mobility}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">First 5 Yards:</span> {report.first5}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Determination:</span> {report.determination}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Error Reaction:</span> {report.errorReaction}/5</p>
+                <div className="column is-half-desktop is-half-tablet is-full-mobile">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Tactical</h4>
+                  <CentreMidTacticalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+              </div>
+
+              <div className="columns">
+                <div className="column is-half-desktop is-half-tablet is-full-mobile">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Mental</h4>
+                  <CentreMidMentalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+                <div className="column is-half-desktop is-half-tablet is-full-mobile">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Physical</h4>
+                  <CentreMidPhysicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
                 </div>
               </div>
               <hr />
@@ -310,46 +309,42 @@ class TeamsIndex extends React.Component {
 
             {report.position === 'Attacking Midfield' &&
             <div className="AttackingMidfield-Results">
-              <h4 className="is-size-4">Attacking Midfield Report</h4>
+              <h4 className="is-size-3">Goalkeeper Report</h4>
               <div className="columns">
-                <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Turning:</span> {report.turning}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Finishing:</span> {report.finishing}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Scoring Techniques:</span> {report.scoringTechniques}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Forcing Play:</span> {report.forcingPlay}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Link Play:</span> {report.linkPlay}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Receiving Techniques:</span> {report.receivingTechniques}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Passing Support:</span> {report.passingSupport}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Mobility Movement:</span> {report.mobilityMovement}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Improvisation:</span> {report.improvisation}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Pressure Support:</span> {report.pressureSupport}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Cover Balance:</span> {report.coverBalance}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Pace:</span> {report.pace}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Endurance:</span> {report.endurance}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">First 5 Yards:</span> {report.first5}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Determination:</span> {report.determination}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Error Reaction:</span> {report.errorReaction}/5</p>
+                <div className="column is-half-desktop is-half-tablet is-full-mobile">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
+                  <AttackingMidTechnicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
                 </div>
-                <div className="column is-half-desktop">
-                  <p className="is-size-6"><span className="has-text-weight-bold">Dribbling:</span> {report.dribbling}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Tracking:</span> {report.tracking}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Pressuring:</span> {report.pressuring}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Recovery Runs:</span> {report.recoveryRun}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Change of Direction:</span> {report.changeOfDirection}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Heading:</span> {report.heading}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Depth Width:</span> {report.depthWidth}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Penetration:</span> {report.penetration}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Recovery Delay:</span> {report.recoveryDelay}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Compactness:</span> {report.compactness}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Control Restraint:</span> {report.controlRestraint}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Strength:</span> {report.strength}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Mobility:</span> {report.mobility}/5</p>
-                  <p className="is-size-6"><span className="has-text-weight-bold">Take on Info:</span> {report.takeInfo}/5</p>
+                <div className="column is-half-desktop is-half-tablet is-full-mobile">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Tactical</h4>
+                  <AttackingMidTacticalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+              </div>
+
+              <div className="columns">
+                <div className="column is-half-desktop is-half-tablet is-full-mobile">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Mental</h4>
+                  <AttackingMidMentalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+                <div className="column is-half-desktop is-half-tablet is-full-mobile">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Physical</h4>
+                  <AttackingMidPhysicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
                 </div>
               </div>
               <hr />
-            </div>
-            }
+            </div>}
 
             {Auth.getPayLoad().sub === report.createdBy &&
             <div className="id">
