@@ -8,7 +8,7 @@ import GoalkeeperTechnicalChart from '../Charts/GK/Technical';
 import GoalkeeperTacticalChart from '../Charts/GK/Tactical';
 import GoalkeeperMentalChart from '../Charts/GK/Mental';
 import GoalkeeperPhysicalChart from '../Charts/GK/Physical';
-import GoalkeeperOverallChart from '../Charts/Gk/Overall';
+import GoalkeeperOverallChart from '../Charts/Overall/GK';
 import FullBackTechnicalChart from '../Charts/FB/Technical';
 import FullBackTacticalChart from '../Charts/FB/Tactical';
 import FullBackMentalChart from '../Charts/FB/Mental';

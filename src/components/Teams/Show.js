@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import PlayerForm from '../Players/form';
+import PlayerForm from '../Players/Form';
 import Auth from '../lib/Auth';
 
 class TeamsIndex extends React.Component {
