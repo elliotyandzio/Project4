@@ -1571,7 +1571,10 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
           <label htmlFor="endLocation">End Location</label>
           <AutoComplete id="endLocation" name="endLocation" className="input" placeholder="End Location" handlePlaceChange={handleEndLocationChange}/>
         </div>
-        <button className="button is-primary">Submit</button>
+        <div class="has-text-centered">
+          <button className="button is-primary">Submit</button>
+        </div>
+        <hr />
       </form>
     </div>
   );
