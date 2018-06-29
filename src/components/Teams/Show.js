@@ -31,7 +31,10 @@ class TeamsIndex extends React.Component {
     axios.post(`/api/teams/${this.props.match.params.id}/players`, this.state.player, {
       headers: {Authorization: `Bearer ${Auth.getToken()}`}
     })
-      .then(this.setState({ isOpen: false, player: {} }));
+      .then(res => {
+        const teamPlayers = this.state.teamPlayers.concat(res.data);
+        this.setState({teamPlayers, isOpen: false, player: {} });
+      });
   }
 
   delete = () => {

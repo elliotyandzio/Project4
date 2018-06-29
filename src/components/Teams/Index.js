@@ -27,7 +27,6 @@ class TeamsIndex extends React.Component {
   }
 
   handleSubmit = ( e ) => {
-    console.log('here!');
     e.preventDefault();
     axios.post('/api/teams', this.state.team, {
       headers: {Authorization: `Bearer ${Auth.getToken()}`}

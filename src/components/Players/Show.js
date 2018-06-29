@@ -29,6 +29,7 @@ import AttackingMidPhysicalChart from '../Charts/AM/Physical';
 class TeamsIndex extends React.Component {
   state = {
     player: {}, //object for return player data
+    reports: {},
     isOpen: false, //isOpen for the tabs
     id: '',       //id for the tabs
     modalIsOpen: false, //isOpen for the modal
@@ -49,7 +50,7 @@ class TeamsIndex extends React.Component {
     axios.delete(`/api/teams/${this.state.teamId}/players/${this.state.playerId}/reports/${report._id}`, {
       headers: {Authorization: `Bearer ${Auth.getToken()}`}
     })
-      .then(res => this.setState({ reports: res.data.reports}));
+      .then(res => this.setState({player: res.data }));
   }
 
   componentWillUpdate() {
