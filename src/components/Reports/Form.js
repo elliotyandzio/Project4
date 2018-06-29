@@ -1562,6 +1562,10 @@ const TeamsForm = ({ handleChange, handleSubmit, report, handlePositionSelect, h
         </div>}
 
         <hr />
+        <h2 className="is-size-2">Comments</h2>
+        <textarea className="textarea" placeholder="Add extra comments here..." name="comments" onChange={handleChange} value={report.comments || ''}/>
+
+        <hr />
         <h2 className="is-size-2">Expenses</h2>
         <div className="field">
           <label htmlFor="startLocation">Start Location</label>

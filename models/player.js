@@ -290,7 +290,8 @@ const reportSchema = new mongoose.Schema({
   // changeOfDirection: {type: Number, min: 1, max: 5, required: isFrontThree},
   //
   // workRate: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  errorReaction: {type: Number, min: 1, max: 5, required: true}
+  errorReaction: {type: Number, min: 1, max: 5, required: true},
+  comments: {type: String }
 
 //   overallRating: { type: Number, min: 1, max: 5, required: true },
 //   comments: { type: String }

@@ -347,6 +347,10 @@ class TeamsIndex extends React.Component {
               <hr />
             </div>}
 
+            <h4 className="is-size-3">Comments:</h4>
+            <p className="is-size-6">{report.comments}</p>
+
+            <hr />
             {Auth.getPayLoad().sub === report.createdBy &&
             <div className="id">
               <h4 className="is-size-3">Expenses</h4>
