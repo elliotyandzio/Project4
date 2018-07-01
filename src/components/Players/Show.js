@@ -121,7 +121,6 @@ class TeamsIndex extends React.Component {
                 <h4 key={report._id} className="is-size-3">Game Info</h4>
               </div>
 
-              {console.log(Auth.getPayLoad())}
               {/* Checks to see if the report is created by the same user than the one logged in and either shows the delete button or not */}
               {Auth.getPayLoad().sub === report.createdBy &&
               <div className="column is-half-desktop is-half-tablet is-half-mobile">
@@ -144,7 +143,7 @@ class TeamsIndex extends React.Component {
                 <p className="is-size-6"><span className="has-text-weight-bold">Age Group:</span> {report.ageGroup}</p>
                 <p className="is-size-6"><span className="has-text-weight-bold">Footed:</span> {report.footed}</p>
                 <p className="is-size-6"><span className="has-text-weight-bold">Height:</span> {report.height}</p>
-                <p className="is-size-6"><span className="has-text-weight-bold">Written By:</span> {console.log(report)}</p>
+                <p className="is-size-6"><span className="has-text-weight-bold">Written By:</span> {console.log(report.createdBy.username)}</p>
               </div>
             </div>
             <hr />

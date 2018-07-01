@@ -2,6 +2,7 @@ const router = require('express').Router();
 const auth = require('../controllers/auth');
 const teams = require('../controllers/teams');
 const players = require('../controllers/players');
+const expenses = require('../controllers/expenses');
 const secureRoute = require('../lib/secureRoute');
 
 router.route('/teams')
@@ -21,6 +22,9 @@ router.route('/teams/:id/players/:playerId')
   .get(players.show)
   .put(players.update)
   .delete(players.delete);
+
+router.route('/expenses')
+  .get(expenses.index);
 
 router.post('/teams/:id/players/:playerId/reports', secureRoute, players.createReport);
 router.delete('/teams/:id/players/:playerId/reports/:reportId', secureRoute, players.deleteReport);

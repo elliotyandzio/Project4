@@ -63,7 +63,7 @@ function playerReportCreate(req, res, next) {
   console.log(req.body);
   Player
     .findById(req.params.playerId)
-    .populate('createdBy')
+    .populate('createdBy.username')
     .exec()
     .then(player => {
       player.reports.push(req.body);
