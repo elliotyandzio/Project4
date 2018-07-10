@@ -159,10 +159,6 @@ class TeamsIndex extends React.Component {
 
             <div className="Goalkeeper-Results">
               <h4 className="is-size-4">Goalkeeper Report</h4>
-              <GoalkeeperOverallChart
-                id={this.state.id}
-                reports={this.state.player.reports}
-              />
               <div className="columns">
                 <div className="column is-half-desktop is-half-tablet is-full-mobile">
                   <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
