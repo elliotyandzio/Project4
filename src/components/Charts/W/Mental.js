@@ -1,7 +1,7 @@
 import React from 'react';
 import Chart from 'chart.js';
 
-class AttackingMidPhysicalChart extends React.Component {
+class WingerMentalChart extends React.Component {
 
   state = {
     report: {}
@@ -16,20 +16,20 @@ class AttackingMidPhysicalChart extends React.Component {
   }
 
   componentDidUpdate = () => {
-    const arrayData = [this.state.report.mobility, this.state.report.first5, this.state.report.pace, this.state.report.changeOfDirection, this.state.report.strength];
+    const arrayData = [this.state.report.improvisation, this.state.report.takeInfo, this.state.report.errorReaction, this.state.report.determination, this.state.report.tenacity];
 
-    const ctx = document.getElementById('attackingMidPhysical');
+    const ctx = document.getElementById('wingerMental');
     const myRadarChart = new Chart(ctx, { // eslint-disable-line
       type: 'radar',
       data: {
-        labels: ['Mobility', 'First 5 Yards', 'Pace', 'Change of Direction', 'Strength'],
+        labels: ['Improvisation', 'Take on Info', 'Reaction to Errors', 'Determination', 'Tenacity'],
         datasets: [{
-          borderColor: 'rgb(0,225,0)',
-          backgroundColor: 'rgba(0,255,0, 0.6)',
+          borderColor: 'rgb(255,0,0)',
+          backgroundColor: 'rgba(255,0,0, 0.6)',
           radius: 6,
           pointRadius: 6,
           pointBorderWidth: 3,
-          pointBorderColor: 'rgb(0,225,0)',
+          pointBorderColor: 'rgb(255,0,0)',
           pointBackgroundColor: 'transparent',
           data: arrayData
         }]
@@ -67,10 +67,10 @@ class AttackingMidPhysicalChart extends React.Component {
   render() {
     return(
       <div>
-        <canvas id="attackingMidPhysical"></canvas>
+        <canvas id="wingerMental"></canvas>
       </div>
     );
   }
 }
 
-export default AttackingMidPhysicalChart;
+export default WingerMentalChart;

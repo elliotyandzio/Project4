@@ -25,6 +25,14 @@ import AttackingMidTechnicalChart from '../Charts/AM/Technical';
 import AttackingMidTacticalChart from '../Charts/AM/Tactical';
 import AttackingMidMentalChart from '../Charts/AM/Mental';
 import AttackingMidPhysicalChart from '../Charts/AM/Physical';
+import WingerTechnicalChart from '../Charts/W/Technical';
+import WingerTacticalChart from '../Charts/W/Tactical';
+import WingerMentalChart from '../Charts/W/Mental';
+import WingerPhysicalChart from '../Charts/W/Physical';
+import StrikerTechnicalChart from '../Charts/ST/Technical';
+import StrikerTacticalChart from '../Charts/ST/Tactical';
+import StrikerMentalChart from '../Charts/ST/Mental';
+import StrikerPhysicalChart from '../Charts/ST/Physical';
 
 class TeamsIndex extends React.Component {
   state = {
@@ -143,14 +151,14 @@ class TeamsIndex extends React.Component {
                 <p className="is-size-6"><span className="has-text-weight-bold">Age Group:</span> {report.ageGroup}</p>
                 <p className="is-size-6"><span className="has-text-weight-bold">Footed:</span> {report.footed}</p>
                 <p className="is-size-6"><span className="has-text-weight-bold">Height:</span> {report.height}</p>
-                <p className="is-size-6"><span className="has-text-weight-bold">Written By:</span> {console.log(report.createdBy.username)}</p>
+                {/* <p className="is-size-6"><span className="has-text-weight-bold">Written By:</span> {console.log(report.createdBy.username)}</p> */}
               </div>
             </div>
             <hr />
             {report.position === 'Goalkeeper' &&
 
             <div className="Goalkeeper-Results">
-              <h4 className="is-size-3">Goalkeeper Report</h4>
+              <h4 className="is-size-4">Goalkeeper Report</h4>
               <GoalkeeperOverallChart
                 id={this.state.id}
                 reports={this.state.player.reports}
@@ -270,7 +278,7 @@ class TeamsIndex extends React.Component {
 
             {report.position === 'Centre Midfield' &&
             <div className="CentreMidfield-Results">
-              <h4 className="is-size-3">Goalkeeper Report</h4>
+              <h4 className="is-size-4">Centre Midfield Report</h4>
               <div className="columns">
                 <div className="column is-half-desktop is-half-tablet is-full-mobile">
                   <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
@@ -309,7 +317,7 @@ class TeamsIndex extends React.Component {
 
             {report.position === 'Attacking Midfield' &&
             <div className="AttackingMidfield-Results">
-              <h4 className="is-size-3">Goalkeeper Report</h4>
+              <h4 className="is-size-4">Attacking Midfield Report</h4>
               <div className="columns">
                 <div className="column is-half-desktop is-half-tablet is-full-mobile">
                   <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
@@ -338,6 +346,82 @@ class TeamsIndex extends React.Component {
                 <div className="column is-half-desktop is-half-tablet is-full-mobile">
                   <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Physical</h4>
                   <AttackingMidPhysicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+              </div>
+              <hr />
+            </div>}
+
+            {report.position === 'Winger' &&
+            <div className="Winger-Results">
+              <h4 className="is-size-4">Winger Report</h4>
+              <div className="columns">
+                <div className="column is-half-desktop">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
+                  <WingerTechnicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+                <div className="column is-half-desktop">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Tactical</h4>
+                  <WingerTacticalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+              </div>
+              <div className="columns">
+                <div className="column is-half-desktop">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Mental</h4>
+                  <WingerMentalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+                <div className="column is-half-desktop">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Physical</h4>
+                  <WingerPhysicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+              </div>
+              <hr />
+            </div>}
+
+            {report.position === 'Striker' &&
+            <div className="Striker-Results">
+              <h4 className="is-size-4">Striker Report</h4>
+              <div className="columns">
+                <div className="column is-half-desktop">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Technical</h4>
+                  <StrikerTechnicalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+                <div className="column is-half-desktop">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Tactical</h4>
+                  <StrikerTacticalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+              </div>
+              <div className="columns">
+                <div className="column is-half-desktop">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Mental</h4>
+                  <StrikerMentalChart
+                    id={this.state.id}
+                    reports={this.state.player.reports}
+                  />
+                </div>
+                <div className="column is-half-desktop">
+                  <h4 className="is-size-4 has-text-centered has-text-weight-semibold">Physical</h4>
+                  <StrikerPhysicalChart
                     id={this.state.id}
                     reports={this.state.player.reports}
                   />

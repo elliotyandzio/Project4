@@ -42,11 +42,7 @@ function isCentreMidfield() {
 function needsMovement() {
   return ['Centre Back', 'Attacking Midfield'].includes(this.position);
 }
-// //
-// function isNotAttackingPlayer() {
-//   return ['Full Back', 'Centre Back', 'Centre Midfield'].includes(this.position);
-// }
-//
+
 function isWide() {
   return ['Full Back', 'Winger'].includes(this.position);
 }
@@ -70,10 +66,10 @@ function isFrontThree() {
 function isAttackingMid () {
   return this.position === 'Attacking Midfield';
 }
-// //
-// function heading() {
-//   return ['Centre Back', 'Striker'].includes(this.position);
-// }
+
+function isStriker() {
+  return this.position === 'Striker';
+}
 
 
 const reportSchema = new mongoose.Schema({
@@ -129,6 +125,7 @@ const reportSchema = new mongoose.Schema({
   communication: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   commandOfBox: {type: Number, min: 1, max: 5, required: isGoalKeeper },
   errorProne: {type: Number, min: 1, max: 5, required: isGoalKeeper },
+  errorReaction: {type: Number, min: 1, max: 5, required: true},
   //Error reaction below
   //PHYSICAL
   presence: {type: Number, min: 1, max: 5, required: isGoalKeeper },
@@ -153,7 +150,7 @@ const reportSchema = new mongoose.Schema({
   rangeOfPassing: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
 
   //TACTICAL
-  oneVsOneDefending: {type: Number, min: 1, max: 5, required: isWide},
+  oneVsOneDefending: {type: Number, min: 1, max: 5, required: isFullBack},
   interceptions: {type: Number, min: 1, max: 5, required: isDefender },
   tracking: {type: Number, min: 1, max: 5, required: isAttackingPlayer},
   covering: {type: Number, min: 1, max: 5, required: isFullBack },
@@ -171,8 +168,6 @@ const reportSchema = new mongoose.Schema({
   //MENTAL
   determination: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
   takeInfo: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  //errorReaction below
-  //bravery in GoalKeeper
   tenacity: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
 
   //OVERALL
@@ -180,121 +175,81 @@ const reportSchema = new mongoose.Schema({
 
   //CENTRE BACK FIELDS
   //Technical
-  //Heading in fullback
-  //Receiving Techniques in fullback
-  //Range of passing in FullBack
   tackling: {type: Number, min: 1, max: 5, required: isCentre},
-  //playingOutFromBack in Goalkeeper
 
   //TACTICAL
   headingSetPlays: {type: Number, min: 1, max: 5, isCentreBack },
-  //interceptions is in fullback
-  //holdingTheLine is in FullBack
-  //compactness is in FullBack
   decisionMaking: {type: Number, min: 1, max: 5, isCentre},
 
   //Mental
-  //errorReaction below
-  //takeInfo in fullback
-  //determination in fullback
-  //tenacity in FullBack
   aggression: {type: Number, min: 1, max: 5, isCentreBack},
-  //bravery in GK
 
   //PHYSICAL
   jumping: {type: Number, min: 1, max: 5, required: isCentreBack},
-  //pace is in FullBack
-  //first5 is in FullBack
-  //strength is in FullBack
   mobility: {type: Number, min: 1, max: 5, required: needsMovement},
 
   //CENTRE MIDFIELD
   //Technical
-  // Range of passing above
-  // receiving techniques above
-  // Tackling above
   longShots: {type: Number, min: 1, max: 5, required: isForward},
   finishing: {type: Number, min: 1, max: 5, required: isForward},
 
   //TACTICAL
-  //tracking is above
   positioning: {type: Number, min: 1, max: 5, required: isCentreMidfield},
-  //recovery is above
-  //decisionMaking is above
   readingOfGame: {type: Number, min: 1, max: 5, required: isCentreMidfield},
 
   //MENTAL
-  //determination is above
-  //errorReaction
-  //takeInfo  is above
-  //bravery
-  //tenacity is above
+  //All fields in previous categories
 
   //PHYSICAL
-  //endurance  above
-  //boxTobox above
-  // strength above
-  //first5 above
-  //pace above
+  //All fields in previous categories
 
   //ATTACKING MIDFIELD
   //TECHNICAL
-  //dribbling is above
-  //receivingTechniques is above
-  //finishing is above
-  //rangeOfPassing is above
   playInTightAreas: {type: Number, min: 1, max: 5, required: isFrontThree},
-  //longShots is above
 
   //TACTICAL
    linkPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
    penetration: {type: Number, min: 1, max: 5, required: isFrontThree },
    movement: {type: Number, min: 1, max: 5, required: isFrontThree },
-   //tracking is above
-   playingBetweenLines: {type: Number, min: 1, max: 5, required: isAttackingMid },
+   playingBetweenLines: {type: Number, min: 1, max: 5, required: isFrontThree },
 
    //MENTAL
   improvisation: {type: Number, min: 1, max: 5, isFrontThree},
-  //take info is above
-  //error reaction is below
-  //determination is above
-  //tenacity is above
 
   //PHYSICAL
-  //mobility is above
-  //first5 is above
-  //pace is above
   changeOfDirection: {type: Number, min: 1, max: 5, isFrontThree},
-  //strength is above
 
 
 
-  // turning: {type: Number, min: 1, max: 5, required: isAttackingPlayer },
-  // runningWithBall: {type: Number, min: 1, max: 5, required: isWide},
+  //Striker
+  //TECHNICAL
+  //All fields in previous categories
 
-  // blocking: {type: Number, min: 1, max: 5, required: isNotAttackingPlayer },
-  // passingSupport: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  // depthWidth: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  // mobilityMovement: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  // pressureSupport: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  // controlRestraint: {type: Number, min: 1, max: 5, required: isOutfieldPlayer },
-  // headingAttackingSetPlays: {type: Number, min: 1, max: 5, required: isCentreBack},
-  // clearances: {type: Number, min: 1 , max: 5, required: isCentreBack },
-  // scoringTechniques: {type: Number, min: 1, max: 5, required: isFrontThree},
-  // pressuring: {type: Number, min: 1, max: 5, required: isFrontThree},
-  // forcingPlay: {type: Number, min: 1, max: 5, required: isFrontThree},
-  // recoveryRun: {type: Number, min: 1, max: 5, required: isFrontThree},
-  //
-  // strengthTackle: {type: Number, min: 1, max: 5, required: isCentreMidfield},
-  // secondBall: {type: Number, min: 1, max: 5, required: isCentreMidfield},
-  // changeOfDirection: {type: Number, min: 1, max: 5, required: isFrontThree},
-  //
-  // workRate: {type: Number, min: 1, max: 5, required: isOutfieldPlayer},
-  errorReaction: {type: Number, min: 1, max: 5, required: true},
+  //TACTICAL
+  holdUp: {type: Number, min: 1, max: 5, isStriker},
+  playingOnShoulder: {type: Number, min: 1, max: 5, isStriker},
+
+  //MENTAL
+  //All fields in previous categories
+
+  //PHYSICAL
+  //All fields in previous categories
+
+  //Winger
+  //TECHNICAL
+  //All fields in previous categories
+
+  //TACTICAL
+  //All fields in previous categories
+
+  //METNTAL
+  //All fields in previous categories
+
+  //PHYSICAL
+  //All fields in previous categories
+
   comments: {type: String }
 
-//   overallRating: { type: Number, min: 1, max: 5, required: true },
-//   comments: { type: String }
 });
 
 const playerSchema = new mongoose.Schema({

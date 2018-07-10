@@ -12,7 +12,7 @@
 	<li>The final section of the application is the expenses tab, this can be found in the navbar at the top of the page. This section shows all the games the logged in user has submitted reports for and the distance travelled, expense cost and a map of the journey. <b> This section is still being worked on.</b></li>
 </ol>
 
-## Technologies Used
+## Technologies Used 
 <ul>
 	<li>React</li>
 	<li>ExpressJS</li>

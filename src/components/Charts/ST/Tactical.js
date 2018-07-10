@@ -1,7 +1,7 @@
 import React from 'react';
 import Chart from 'chart.js';
 
-class AttackingMidPhysicalChart extends React.Component {
+class StrikerTacticalChart extends React.Component {
 
   state = {
     report: {}
@@ -16,20 +16,20 @@ class AttackingMidPhysicalChart extends React.Component {
   }
 
   componentDidUpdate = () => {
-    const arrayData = [this.state.report.mobility, this.state.report.first5, this.state.report.pace, this.state.report.changeOfDirection, this.state.report.strength];
+    const arrayData = [this.state.report.linkPlay, this.state.report.penetration, this.state.report.movement, this.state.report.tracking, this.state.report.playingBetweenLines, this.state.report.playingOnShoulder, this.state.report.holdUp];
 
-    const ctx = document.getElementById('attackingMidPhysical');
+    const ctx = document.getElementById('strikerTactical');
     const myRadarChart = new Chart(ctx, { // eslint-disable-line
       type: 'radar',
       data: {
-        labels: ['Mobility', 'First 5 Yards', 'Pace', 'Change of Direction', 'Strength'],
+        labels: ['Link Play', 'Penetration', 'Movement', 'Tracking', 'Playing Between Lines', 'Playing On Shoulder', 'Hold Up Play'],
         datasets: [{
-          borderColor: 'rgb(0,225,0)',
-          backgroundColor: 'rgba(0,255,0, 0.6)',
+          borderColor: 'rgb(0,0,225)',
+          backgroundColor: 'rgba(0,0,225, 0.6)',
           radius: 6,
           pointRadius: 6,
           pointBorderWidth: 3,
-          pointBorderColor: 'rgb(0,225,0)',
+          pointBorderColor: 'rgb(0,0,225)',
           pointBackgroundColor: 'transparent',
           data: arrayData
         }]
@@ -67,10 +67,10 @@ class AttackingMidPhysicalChart extends React.Component {
   render() {
     return(
       <div>
-        <canvas id="attackingMidPhysical"></canvas>
+        <canvas id="strikerTactical"></canvas>
       </div>
     );
   }
 }
 
-export default AttackingMidPhysicalChart;
+export default StrikerTacticalChart;

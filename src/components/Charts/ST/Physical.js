@@ -1,7 +1,7 @@
 import React from 'react';
 import Chart from 'chart.js';
 
-class AttackingMidPhysicalChart extends React.Component {
+class StrikerPhysicalChart extends React.Component {
 
   state = {
     report: {}
@@ -18,7 +18,7 @@ class AttackingMidPhysicalChart extends React.Component {
   componentDidUpdate = () => {
     const arrayData = [this.state.report.mobility, this.state.report.first5, this.state.report.pace, this.state.report.changeOfDirection, this.state.report.strength];
 
-    const ctx = document.getElementById('attackingMidPhysical');
+    const ctx = document.getElementById('strikerPhysical');
     const myRadarChart = new Chart(ctx, { // eslint-disable-line
       type: 'radar',
       data: {
@@ -67,10 +67,10 @@ class AttackingMidPhysicalChart extends React.Component {
   render() {
     return(
       <div>
-        <canvas id="attackingMidPhysical"></canvas>
+        <canvas id="strikerPhysical"></canvas>
       </div>
     );
   }
 }
 
-export default AttackingMidPhysicalChart;
+export default StrikerPhysicalChart;

@@ -36,13 +36,13 @@ class Map extends React.Component {
     this.startMarker = new google.maps.Marker({
       position: this.props.start,
       map: this.map,
-      label: '⚽️'
+      label: 'A'
     });
 
     this.endMarker = new google.maps.Marker({
       position: this.props.end,
       map: this.map,
-      label: '⚽️'
+      label: 'B'
     });
   }
 

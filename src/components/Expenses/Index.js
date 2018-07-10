@@ -37,6 +37,8 @@ class ExpensesIndex extends React.Component {
         </div>
           {this.state.reports.map(r =>
           <div key={r._id}>
+            {console.log(r)}
+            {/* {Auth.getPayLoad().sub === r.reports.map(reports => reports.createdBy) r.name} */}
             {r.reports.map(reports => Auth.getPayLoad().sub === reports.createdBy &&
               <div key={reports._id}>
               <div className="card">
